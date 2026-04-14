@@ -4,8 +4,7 @@ import { generatePageMetadata } from "@/lib/seo";
 import { getTranslation } from "@/i18n/config";
 import ArticleJsonLd from "@/components/seo/JsonLd";
 import type { Metadata } from "next";
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+import { BASE_URL } from "@/lib/config";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
