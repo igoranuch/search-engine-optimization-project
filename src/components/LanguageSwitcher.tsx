@@ -20,9 +20,16 @@ export default function LanguageSwitcher({ locale }: { locale: string }) {
   // Замінюємо поточну мову в URL на іншу: /uk/blog → /en/blog
   const switchedPath = pathname.replace(`/${locale}`, `/${otherLocale}`);
 
+  const flagSrc =
+    otherLocale === "uk"
+      ? "https://flagcdn.com/w40/ua.png"
+      : "https://flagcdn.com/w40/gb.png";
+  const flagAlt = otherLocale === "uk" ? "Українська" : "English";
+
   return (
-    <Link href={switchedPath}>
-      {otherLocale === "uk" ? "🇺🇦 UA" : "🇬🇧 EN"}
+    <Link href={switchedPath} className="lang-switcher" title={flagAlt}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={flagSrc} alt={flagAlt} width={24} height={16} />
     </Link>
   );
 }

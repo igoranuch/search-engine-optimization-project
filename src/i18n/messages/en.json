@@ -18,5 +18,9 @@
     "publishedAt": "Published",
     "author": "Author",
     "description": "All articles about computers, hardware and games"
+  },
+  "related": {
+    "heading": "Read also",
+    "readMore": "Read"
   }
 }

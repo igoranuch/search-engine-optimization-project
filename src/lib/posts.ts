@@ -65,6 +65,34 @@ export function getPostBySlug(locale: string, slug: string): Post | null {
 }
 
 /**
+ * Отримати пов'язані пости для конкретного поста.
+ * Алгоритм: 1) спільні теги (чим більше — тим вище), 2) решта за датою.
+ * Повертає до maxCount постів, поточний пост виключається.
+ */
+export function getRelatedPosts(
+  locale: string,
+  currentSlug: string,
+  maxCount = 3
+): PostMeta[] {
+  const all = getAllPosts(locale);
+  const current = all.find((p) => p.slug === currentSlug);
+  const others = all.filter((p) => p.slug !== currentSlug);
+
+  if (!current) return others.slice(0, maxCount);
+
+  const currentTags = new Set(current.tags ?? []);
+
+  const scored = others.map((post) => {
+    const sharedTags = (post.tags ?? []).filter((t) => currentTags.has(t)).length;
+    return { post, sharedTags };
+  });
+
+  scored.sort((a, b) => b.sharedTags - a.sharedTags);
+
+  return scored.slice(0, maxCount).map((s) => s.post);
+}
+
+/**
  * Отримати всі slug для генерації статичних шляхів.
  */
 export function getAllPostSlugs(locale: string): string[] {

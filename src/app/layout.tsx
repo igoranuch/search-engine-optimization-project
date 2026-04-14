@@ -12,6 +12,7 @@ import "./globals.css";
  *   сканування. Після верифікації можна подати sitemap і відстежувати ранжування.
  */
 export const metadata: Metadata = {
+  metadataBase: new URL("https://gearforge.blog"),
   verification: {
     google: "qkPKH-3cSzUDiFRLo8z9U-d6oKYz30p_CEEGzcAH9Io",
   },

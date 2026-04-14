@@ -3,6 +3,7 @@ import { getPostBySlug, getAllPostSlugs } from "@/lib/posts";
 import { generatePageMetadata } from "@/lib/seo";
 import { getTranslation } from "@/i18n/config";
 import ArticleJsonLd from "@/components/seo/JsonLd";
+import RelatedPosts from "@/components/RelatedPosts";
 import type { Metadata } from "next";
 import { BASE_URL } from "@/lib/config";
 
@@ -89,6 +90,15 @@ export default async function BlogPostPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
       </article>
+
+      <RelatedPosts
+        locale={locale}
+        currentSlug={slug}
+        labels={{
+          heading: t("related.heading"),
+          readMore: t("related.readMore"),
+        }}
+      />
     </>
   );
 }
