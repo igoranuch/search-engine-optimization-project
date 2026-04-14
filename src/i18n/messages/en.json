@@ -1,0 +1,19 @@
+{
+  "site": {
+    "title": "TechPulse — Computer & Gaming Blog",
+    "description": "Hardware reviews, performance benchmarks and gaming news"
+  },
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "about": "About"
+  },
+  "home": {
+    "heading": "Latest Articles",
+    "readMore": "Read more"
+  },
+  "blog": {
+    "publishedAt": "Published",
+    "author": "Author"
+  }
+}
