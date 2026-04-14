@@ -13,7 +13,7 @@ import "./globals.css";
  */
 export const metadata: Metadata = {
   verification: {
-    google: "z5q7yrJFewA8n2gWH2ACnda7zR4MHUxwDUcVsoKTlck",
+    google: "qkPKH-3cSzUDiFRLo8z9U-d6oKYz30p_CEEGzcAH9Io",
   },
 };
 
