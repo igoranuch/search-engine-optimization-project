@@ -121,6 +121,55 @@ h2 {
   color: #111;
 }
 
+/* ===== Hero ===== */
+.hero {
+  padding: 3.5rem 0 2.5rem;
+  border-bottom: 1px solid #e8e8e8;
+  margin-bottom: 2.5rem;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, #111 60%, #0057b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: #555;
+  max-width: 520px;
+}
+
+/* ===== Section heading ===== */
+.section-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: #111;
+}
+
+/* ===== "Всі статті" посилання ===== */
+.view-all-link {
+  display: inline-block;
+  margin-top: 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0057b8;
+  border-bottom: 2px solid #ffe900;
+  padding-bottom: 1px;
+}
+
+.view-all-link:hover {
+  text-decoration: none;
+  color: #003d8a;
+}
+
 /* ===== Картка статті ===== */
 .article-card {
   border: 1px solid #e8e8e8;

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getTranslation } from "@/i18n/config";
 import { generatePageMetadata } from "@/lib/seo";
 import { getAllPosts } from "@/lib/posts";
@@ -23,15 +24,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   const { t } = await getTranslation(locale);
-  const posts = getAllPosts(locale);
+  // Показуємо тільки 3 останні статті на головній
+  const latestPosts = getAllPosts(locale).slice(0, 3);
 
   return (
-    <section>
-      <h1>{t("home.heading")}</h1>
-      {posts.length === 0 && <p>Coming soon...</p>}
-      {posts.map((post) => (
-        <ArticleCard key={post.slug} post={post} locale={locale} />
-      ))}
-    </section>
+    <>
+      {/* Hero-секція — унікальний контент головної, якого немає на /blog */}
+      <section className="hero">
+        <h1 className="hero-title">GearForge</h1>
+        <p className="hero-subtitle">{t("home.heroSubtitle")}</p>
+      </section>
+
+      {/* Останні 3 статті */}
+      <section>
+        <h2 className="section-heading">{t("home.heading")}</h2>
+        {latestPosts.map((post) => (
+          <ArticleCard key={post.slug} post={post} locale={locale} />
+        ))}
+        <Link href={`/${locale}/blog`} className="view-all-link">
+          {t("home.viewAll")}
+        </Link>
+      </section>
+    </>
   );
 }

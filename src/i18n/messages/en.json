@@ -10,7 +10,9 @@
   },
   "home": {
     "heading": "Latest Articles",
-    "readMore": "Read more"
+    "readMore": "Read more",
+    "heroSubtitle": "Hardware reviews, performance benchmarks and PC build guides",
+    "viewAll": "All articles →"
   },
   "blog": {
     "publishedAt": "Published",
