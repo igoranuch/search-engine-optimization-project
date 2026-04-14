@@ -20,6 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
+/*TODO*/
+
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   const { t } = await getTranslation(locale);
