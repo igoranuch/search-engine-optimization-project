@@ -1,5 +1,21 @@
 import { headers } from "next/headers";
+import type { Metadata } from "next";
 import "./globals.css";
+
+/*
+ * SEO-ПОЯСНЕННЯ: Google Search Console verification
+ *
+ * Що: <meta name="google-site-verification"> — підтвердження права власності на сайт.
+ * Навіщо: Google Search Console потребує верифікації перш ніж показувати дані
+ *   про індексацію, кліки, позиції та помилки сайту.
+ * Як впливає: Без верифікації недоступні дані про органічний трафік та помилки
+ *   сканування. Після верифікації можна подати sitemap і відстежувати ранжування.
+ */
+export const metadata: Metadata = {
+  verification: {
+    google: "z5q7yrJFewA8n2gWH2ACnda7zR4MHUxwDUcVsoKTlck",
+  },
+};
 
 /*
  * SEO-ПОЯСНЕННЯ: Атрибут lang на <html>
