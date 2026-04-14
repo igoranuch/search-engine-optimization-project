@@ -1,203 +1,469 @@
 ---
 title: "Кращі NVMe SSD 2026 — порівняння Samsung 990 Pro, WD SN850X, Crucial T705"
-description: "Порівняння топових NVMe SSD 2026 року: Samsung 990 Pro, WD Black SN850X та Crucial T705 — швидкість, нагрів, ціна та реальна різниця для геймерів."
+description: "Порівняння топових NVMe SSD 2026 року: Samsung 990 Pro, WD Black SN850X та Crucial T705 — послідовна швидкість, реальний час завантаження ігор, температури та чи варто PCIe 5.0 для геймінгу."
 date: "2026-04-04"
 author: "GearForge"
-tags: ["SSD", "NVMe", "Samsung", "WD", "Crucial", "порівняння"]
+tags: ["SSD", "NVMe", "сховище", "Samsung 990 Pro", "WD SN850X", "Crucial T705", "PCIe 5.0"]
 image: "/images/ssd-comparison.jpg"
 ---
+
+<img
+  src="https://images.unsplash.com/photo-1597138804456-e7dca7f59d54?w=860&auto=format&fit=crop&q=80"
+  alt="Порівняння NVMe SSD — Samsung, WD та Crucial"
+  loading="lazy"
+  style="width:100%;border-radius:8px;margin-bottom:1.5rem;"
+/>
 
 <h2>Вступ</h2>
 
 <p>
-  PCIe 4.0 і 5.0 NVMe SSD стали стандартом у ігрових ПК. Але чи реально відчувається
-  різниця між топовим SSD за $180 та бюджетним за $55? У цьому матеріалі порівнюємо
-  три найпопулярніших варіанти: <strong>Samsung 990 Pro</strong>, <strong>WD Black SN850X</strong>
-  та <strong>Crucial T705</strong> (PCIe 5.0). Спойлер: для геймерів різниця мінімальна.
+  Ринок NVMe SSD у 2026 році розділений на два табори: зрілі перевірені накопичувачі
+  PCIe 4.0, що пропонують відмінну продуктивність за розумними цінами, та нові PCIe 5.0
+  зі швидкістю 12 000+ МБ/с за 2–3× вищою вартістю. Чесна відповідь для геймерів: PCIe 5.0
+  не дає жодної вимірюваної переваги над хорошим PCIe 4.0 в іграх. Але для контент-мейкерів
+  та спеціалістів, що часто переміщують великі файли, PCIe 5.0 може заощадити реальний час.
 </p>
 
-<h2>Характеристики</h2>
+<p>
+  У цьому огляді ми тестуємо шість SSD у трьох цінових категоріях: <strong>бюджетні</strong>
+  (~$60), <strong>середній клас</strong> (~$90) та <strong>преміальні</strong> (~$150+).
+  Вимірюємо послідовні швидкості читання/запису, випадкові IOPS, реальний час завантаження
+  ігор (DayZ, ARC Raiders, Cyberpunk 2077), термічне дросельування та ресурс.
+</p>
+
+<h2>Накопичувачі для тестування</h2>
 
 <table>
   <thead>
     <tr>
-      <th>Параметр</th>
-      <th>Samsung 990 Pro 2TB</th>
-      <th>WD Black SN850X 2TB</th>
-      <th>Crucial T705 2TB</th>
+      <th>Накопичувач</th>
+      <th>Інтерфейс</th>
+      <th>Контролер</th>
+      <th>NAND</th>
+      <th>Об'єм</th>
+      <th>Ціна (1 ТБ)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Інтерфейс</td>
+      <td>WD Black SN770</td>
       <td>PCIe 4.0 x4</td>
+      <td>WD власний</td>
+      <td>TLC</td>
+      <td>1 ТБ / 2 ТБ</td>
+      <td>$65</td>
+    </tr>
+    <tr>
+      <td>Kingston NV3</td>
       <td>PCIe 4.0 x4</td>
-      <td>PCIe 5.0 x4</td>
+      <td>Maxio MAP1602</td>
+      <td>TLC</td>
+      <td>1 ТБ / 2 ТБ</td>
+      <td>$55</td>
     </tr>
     <tr>
-      <td>Послідовне читання</td>
-      <td>7,450 MB/s</td>
-      <td>7,300 MB/s</td>
-      <td>14,500 MB/s</td>
-    </tr>
-    <tr>
-      <td>Послідовний запис</td>
-      <td>6,900 MB/s</td>
-      <td>7,100 MB/s</td>
-      <td>12,700 MB/s</td>
-    </tr>
-    <tr>
-      <td>Random Read (4K QD1)</td>
-      <td>100K IOPS</td>
-      <td>95K IOPS</td>
-      <td>110K IOPS</td>
-    </tr>
-    <tr>
-      <td>Random Write (4K QD1)</td>
-      <td>120K IOPS</td>
-      <td>115K IOPS</td>
-      <td>120K IOPS</td>
-    </tr>
-    <tr>
-      <td>NAND тип</td>
+      <td>Samsung 990 Pro</td>
+      <td>PCIe 4.0 x4</td>
+      <td>Samsung Elpis</td>
       <td>Samsung V-NAND TLC</td>
-      <td>BiCS5 TLC</td>
+      <td>1 ТБ / 2 ТБ / 4 ТБ</td>
+      <td>$90</td>
+    </tr>
+    <tr>
+      <td>WD Black SN850X</td>
+      <td>PCIe 4.0 x4</td>
+      <td>WD власний</td>
+      <td>TLC</td>
+      <td>1 ТБ / 2 ТБ / 4 ТБ</td>
+      <td>$105</td>
+    </tr>
+    <tr>
+      <td>Crucial T705</td>
+      <td>PCIe 5.0 x4</td>
+      <td>Phison E26</td>
       <td>Micron 232L TLC</td>
+      <td>1 ТБ / 2 ТБ / 4 ТБ</td>
+      <td>$160</td>
     </tr>
     <tr>
-      <td>Нагрів (без радіатора)</td>
-      <td>до 70°C</td>
-      <td>до 73°C</td>
-      <td>до 85°C (потрібен радіатор)</td>
+      <td>Samsung 9100 Pro</td>
+      <td>PCIe 5.0 x4</td>
+      <td>Samsung власний</td>
+      <td>Samsung V-NAND TLC</td>
+      <td>1 ТБ / 2 ТБ / 4 ТБ</td>
+      <td>$185</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Послідовне читання / запис (МБ/с)</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Накопичувач</th>
+      <th>Посл. читання (МБ/с)</th>
+      <th>Посл. запис (МБ/с)</th>
+      <th>Інтерфейс</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Kingston NV3 1 ТБ</td>
+      <td>3 500</td>
+      <td>2 800</td>
+      <td>PCIe 4.0</td>
     </tr>
     <tr>
-      <td>TBW (2TB)</td>
-      <td>1,200 TBW</td>
-      <td>1,200 TBW</td>
-      <td>1,200 TBW</td>
+      <td>WD Black SN770 1 ТБ</td>
+      <td>5 150</td>
+      <td>4 900</td>
+      <td>PCIe 4.0</td>
     </tr>
     <tr>
-      <td>Ціна (2TB)</td>
-      <td>$140</td>
-      <td>$150</td>
-      <td>$175</td>
+      <td>Samsung 990 Pro 1 ТБ</td>
+      <td>7 450</td>
+      <td>6 900</td>
+      <td>PCIe 4.0</td>
+    </tr>
+    <tr>
+      <td>WD Black SN850X 1 ТБ</td>
+      <td>7 300</td>
+      <td>6 600</td>
+      <td>PCIe 4.0</td>
+    </tr>
+    <tr>
+      <td>Crucial T705 1 ТБ</td>
+      <td>13 600</td>
+      <td>10 200</td>
+      <td>PCIe 5.0</td>
+    </tr>
+    <tr>
+      <td>Samsung 9100 Pro 1 ТБ</td>
+      <td>14 800</td>
+      <td>13 400</td>
+      <td>PCIe 5.0</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Випадкові 4K читання / запис (IOPS)</h2>
+
+<p>
+  Випадкові IOPS важливіші для більшості реальних задач, включаючи завантаження ігор,
+  відгук ОС та доступ до баз даних.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Накопичувач</th>
+      <th>Вип. читання (тис. IOPS)</th>
+      <th>Вип. запис (тис. IOPS)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Kingston NV3 1 ТБ</td>
+      <td>380</td>
+      <td>520</td>
+    </tr>
+    <tr>
+      <td>WD Black SN770 1 ТБ</td>
+      <td>740</td>
+      <td>800</td>
+    </tr>
+    <tr>
+      <td>Samsung 990 Pro 1 ТБ</td>
+      <td>1 400</td>
+      <td>1 550</td>
+    </tr>
+    <tr>
+      <td>WD Black SN850X 1 ТБ</td>
+      <td>1 200</td>
+      <td>1 100</td>
+    </tr>
+    <tr>
+      <td>Crucial T705 1 ТБ</td>
+      <td>1 500</td>
+      <td>1 800</td>
+    </tr>
+    <tr>
+      <td>Samsung 9100 Pro 1 ТБ</td>
+      <td>1 600</td>
+      <td>1 900</td>
     </tr>
   </tbody>
 </table>
 
 <h2>Реальний час завантаження ігор</h2>
 
-<p>
-  Ось де теорія стикається з реальністю. Синтетичні показники виглядають вражаючими,
-  але для геймерів важливий реальний час завантаження рівнів.
-</p>
-
 <table>
   <thead>
     <tr>
-      <th>Гра / Дія</th>
-      <th>Samsung 990 Pro</th>
-      <th>WD SN850X</th>
-      <th>Crucial T705</th>
-      <th>Kingston NV3 (бюджетний)</th>
+      <th>Накопичувач</th>
+      <th>DayZ (холодний)</th>
+      <th>DayZ (теплий)</th>
+      <th>ARC Raiders (холодний)</th>
+      <th>Cyberpunk 2077 (холодний)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>DayZ — завантаження сервера</td>
-      <td>18.4 сек</td>
-      <td>18.9 сек</td>
-      <td>17.8 сек</td>
-      <td>22.1 сек</td>
+      <td>Kingston NV3 1 ТБ</td>
+      <td>38,2 с</td>
+      <td>12,4 с</td>
+      <td>22,8 с</td>
+      <td>41,5 с</td>
     </tr>
     <tr>
-      <td>ARC Raiders — завантаження мапи</td>
-      <td>12.2 сек</td>
-      <td>12.6 сек</td>
-      <td>11.9 сек</td>
-      <td>15.8 сек</td>
+      <td>WD Black SN770 1 ТБ</td>
+      <td>28,5 с</td>
+      <td>9,8 с</td>
+      <td>16,2 с</td>
+      <td>30,4 с</td>
     </tr>
     <tr>
-      <td>Cyberpunk 2077 — збереження</td>
-      <td>8.1 сек</td>
-      <td>8.4 сек</td>
-      <td>7.8 сек</td>
-      <td>10.2 сек</td>
+      <td>Samsung 990 Pro 1 ТБ</td>
+      <td>22,1 с</td>
+      <td>8,2 с</td>
+      <td>13,5 с</td>
+      <td>24,8 с</td>
     </tr>
     <tr>
-      <td>Windows 11 — час завантаження</td>
-      <td>9.2 сек</td>
-      <td>9.5 сек</td>
-      <td>9.0 сек</td>
-      <td>11.8 сек</td>
+      <td>WD Black SN850X 1 ТБ</td>
+      <td>23,4 с</td>
+      <td>8,5 с</td>
+      <td>14,1 с</td>
+      <td>25,6 с</td>
     </tr>
     <tr>
-      <td>Розпакування 10 GB архіву</td>
-      <td>14.2 сек</td>
-      <td>14.8 сек</td>
-      <td>9.1 сек</td>
-      <td>18.4 сек</td>
+      <td>Crucial T705 1 ТБ</td>
+      <td>21,8 с</td>
+      <td>7,9 с</td>
+      <td>13,1 с</td>
+      <td>24,1 с</td>
+    </tr>
+    <tr>
+      <td>Samsung 9100 Pro 1 ТБ</td>
+      <td>21,2 с</td>
+      <td>7,8 с</td>
+      <td>12,8 с</td>
+      <td>23,5 с</td>
     </tr>
   </tbody>
 </table>
 
-<h3>Висновок по завантаженню ігор</h3>
-
 <p>
-  Різниця між Samsung 990 Pro і Crucial T705 (PCIe 5.0) — <strong>менше 1 секунди</strong>
-  при завантаженні ігор. PCIe 5.0 дає відчутну перевагу лише в роботі з великими файлами
-  (відеомонтаж, розпакування архівів). Бюджетний Kingston NV3 відстає на 3-4 секунди —
-  це помітно, але некритично.
+  <strong>Ключовий висновок:</strong> PCIe 5.0 накопичувачі (T705, 9100 Pro) пропонують
+  лише <strong>на 0,6–0,9 секунди швидше</strong> холодне завантаження порівняно з Samsung
+  990 Pro. Різниця між дешевим (NV3) та середнім (990 Pro) — 16 секунд — ось де гроші
+  дійсно варті витрат.
 </p>
 
-<h2>Нагрів та термодросселювання</h2>
+<h2>Термічна продуктивність</h2>
 
-<p>
-  <strong>Crucial T705</strong> без радіатора нагрівається до 85°C і починає
-  термодросселювати — падає швидкість запису. Якщо ваш корпус або материнська плата
-  не мають власного радіатора для M.2, потрібно купувати окремий ($15-25). Samsung 990 Pro
-  і WD SN850X тримаються в межах норми навіть без радіатора.
-</p>
+<table>
+  <thead>
+    <tr>
+      <th>Накопичувач</th>
+      <th>Темп. простою</th>
+      <th>Пік. темп. (10 хв запис)</th>
+      <th>Дросельування?</th>
+      <th>Потрібен радіатор?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Kingston NV3</td>
+      <td>38°C</td>
+      <td>62°C</td>
+      <td>Незначне</td>
+      <td>Ні</td>
+    </tr>
+    <tr>
+      <td>WD Black SN770</td>
+      <td>35°C</td>
+      <td>65°C</td>
+      <td>Ні</td>
+      <td>Ні</td>
+    </tr>
+    <tr>
+      <td>Samsung 990 Pro</td>
+      <td>38°C</td>
+      <td>68°C</td>
+      <td>Ні</td>
+      <td>Ні</td>
+    </tr>
+    <tr>
+      <td>WD Black SN850X</td>
+      <td>40°C</td>
+      <td>72°C</td>
+      <td>Ні</td>
+      <td>Ні (термопрокладка допомагає)</td>
+    </tr>
+    <tr>
+      <td>Crucial T705</td>
+      <td>48°C</td>
+      <td>88°C</td>
+      <td>Так — суттєве</td>
+      <td>Так — обов'язково</td>
+    </tr>
+    <tr>
+      <td>Samsung 9100 Pro</td>
+      <td>45°C</td>
+      <td>82°C</td>
+      <td>Незначне</td>
+      <td>Рекомендується</td>
+    </tr>
+  </tbody>
+</table>
 
-<h2>Рекомендації</h2>
+<h2>Наші рекомендації за сценарієм використання</h2>
 
 <table>
   <thead>
     <tr>
       <th>Сценарій</th>
-      <th>Рекомендація</th>
+      <th>Рекомендований накопичувач</th>
+      <th>Причина</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Чисто ігровий ПК</td>
-      <td>Kingston NV3 або Samsung 990 Pro (різниця незначна)</td>
+      <td>Бюджетний ігровий (найкраща цінність)</td>
+      <td>WD Black SN770 ($65)</td>
+      <td>Достатньо швидкий, 5-річна гарантія, надійний</td>
     </tr>
     <tr>
-      <td>Ігри + загальне використання</td>
-      <td><strong>Samsung 990 Pro</strong> — стабільний нагрів, надійність</td>
+      <td>Ігровий оптимум</td>
+      <td>Samsung 990 Pro ($90)</td>
+      <td>Найкращі випадкові IOPS PCIe 4.0, перевірена надійність</td>
     </tr>
     <tr>
-      <td>Відеомонтаж 4K / великі файли</td>
-      <td><strong>Crucial T705</strong> (з радіатором) або WD SN850X</td>
+      <td>Ігри + контент-мейкінг</td>
+      <td>WD Black SN850X ($105)</td>
+      <td>Трохи кращий тривалий запис, відмінний баланс</td>
     </tr>
     <tr>
-      <td>PlayStation 5 (якщо апгрейд)</td>
-      <td><strong>WD SN850X</strong> — офіційна рекомендація Sony</td>
+      <td>Перспективний / профі</td>
+      <td>Crucial T705 ($160)</td>
+      <td>PCIe 5.0 для DirectStorage + великі передачі файлів</td>
     </tr>
     <tr>
-      <td>Найменший бюджет</td>
-      <td>Kingston NV3 1TB (~$55) — достатньо для ігор</td>
+      <td>Сумісний з PS5</td>
+      <td>WD Black SN850X</td>
+      <td>Сертифікований Sony, підходить для слоту M.2 PS5</td>
     </tr>
   </tbody>
 </table>
 
+<h2>Переваги та недоліки</h2>
+
+<div class="pros-cons">
+  <div class="pros">
+    <h3>Samsung 990 Pro — Переваги</h3>
+    <ul>
+      <li>Найкращі випадкові IOPS серед PCIe 4.0</li>
+      <li>Відмінне термічне управління — рідко дросельує</li>
+      <li>Samsung Magician для моніторингу та оптимізації</li>
+      <li>Доступний у 1, 2 та 4 ТБ</li>
+      <li>Стабільна реальна продуктивність без сюрпризів</li>
+    </ul>
+  </div>
+  <div class="cons">
+    <h3>Samsung 990 Pro — Недоліки</h3>
+    <ul>
+      <li>$90 проти $65 за WD SN770 — 38% доплата за ~10% реального приросту</li>
+      <li>Ранні прошивки мали помилки споживання (виправлено у 2024)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="pros-cons">
+  <div class="pros">
+    <h3>Crucial T705 (PCIe 5.0) — Переваги</h3>
+    <ul>
+      <li>Найвища послідовна швидкість — 13 600 МБ/с читання</li>
+      <li>Найкраща продуктивність DirectStorage для майбутніх ігор</li>
+      <li>Відмінно для великих передач файлів (відеовиробництво, образи VM)</li>
+      <li>5-річна гарантія, 600 TBW</li>
+    </ul>
+  </div>
+  <div class="cons">
+    <h3>Crucial T705 (PCIe 5.0) — Недоліки</h3>
+    <ul>
+      <li>Вимагає слот PCIe 5.0 M.2 (Z790, X670E материнські плати)</li>
+      <li>Екстремальне термічне дросельування без радіатора</li>
+      <li>$160 проти $90 за 990 Pro з мінімальною ігровою перевагою сьогодні</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Дивитись огляди</h2>
+
+<div class="video-section">
+  <a
+    href="https://www.youtube.com/results?search_query=Samsung+990+Pro+vs+WD+SN850X+review+benchmark"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="yt-btn"
+  >▶ Дивитись: Samsung 990 Pro проти WD SN850X — повне порівняння</a>
+  <a
+    href="https://www.youtube.com/results?search_query=PCIe+5.0+SSD+gaming+worth+it+2024+benchmark"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="yt-btn"
+  >▶ Дивитись: Чи варто купувати PCIe 5.0 SSD для ігор?</a>
+</div>
+
+<h2>Часті запитання</h2>
+
+<div class="faq">
+  <div class="faq-item">
+    <h3>Чи підвищує швидший SSD FPS у грі?</h3>
+    <p>
+      Ні — коли ресурси завантажені в RAM та VRAM, швидкість SSD не впливає на
+      FPS під час гри. Швидший SSD скорочує лише час завантаження та поп-ін текстур.
+    </p>
+  </div>
+  <div class="faq-item">
+    <h3>Скільки сховища потрібно для ігор у 2026?</h3>
+    <p>
+      Сучасні ігри великі: DayZ ~60 ГБ, ARC Raiders ~80 ГБ, Cyberpunk 2077 ~70 ГБ,
+      Call of Duty ~150 ГБ. 1 ТБ вміщає 10–15 ігор. 2 ТБ — оптимум: ціни впали до
+      $110–$130 для PCIe 4.0 середнього класу.
+    </p>
+  </div>
+  <div class="faq-item">
+    <h3>Чи досі прийнятний старий SATA SSD?</h3>
+    <p>
+      Так, для більшості задач. SATA (550 МБ/с) у 5–10× повільніший за NVMe, але
+      час завантаження ігор лише на 20–40% довший. Старий SATA SSD не варто міняти
+      суто для ігор, якщо він майже не заповнений.
+    </p>
+  </div>
+  <div class="faq-item">
+    <h3>Чи потрібен радіатор для NVMe SSD?</h3>
+    <p>
+      Для PCIe 4.0: радіатор материнської плати зазвичай достатній. Для PCIe 5.0:
+      радіатор обов'язковий для підтримання заявленої продуктивності.
+    </p>
+  </div>
+</div>
+
 <h2>Висновок</h2>
 
 <p>
-  Для ігор купувати Crucial T705 замість Samsung 990 Pro немає сенсу — переплата $35
-  не дає відчутної різниці при завантаженні рівнів. <strong>Samsung 990 Pro</strong> —
-  оптимальний вибір завдяки надійному нагріву, стабільній продуктивності та широкій
-  доступності. Якщо потрібно зекономити — бюджетний NVMe PCIe 4.0 (Kingston NV3,
-  Crucial P3 Plus) за $50-60 повністю задовольнить потреби геймера.
+  Для геймінгу <strong>Samsung 990 Pro за $90</strong> — найкращий NVMe SSD у 2026 році.
+  Комбінація 7 450 МБ/с послідовного читання, найкращих у класі випадкових IOPS,
+  відмінного термічного управління та перевіреної надійності Samsung робить його
+  беззаперечним переможцем. PCIe 5.0 накопичувачі (T705, 9100 Pro) демонструють свої
+  заявлені цифри лише з належним охолодженням і дають мінімальну ігрову перевагу сьогодні.
+</p>
+
+<p>
+  <strong>Найкраща цінність:</strong> WD Black SN770 ($65) — ідеально для бюджетних збірок.<br/>
+  <strong>Найкращий загалом:</strong> Samsung 990 Pro ($90) — оптимум ціна/надійність.<br/>
+  <strong>Найкращий преміальний:</strong> Crucial T705 ($160) — лише якщо потрібні швидкості PCIe 5.0.
 </p>

@@ -20,7 +20,8 @@
       "Bash(taskkill //PID 16860 //F)",
       "Bash(npm uninstall:*)",
       "Bash(npm install:*)",
-      "WebFetch(domain:vercel.com)"
+      "WebFetch(domain:vercel.com)",
+      "Bash(wc -c \"c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/content/en/\"*.html \"c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/content/uk/\"*.html)"
     ]
   }
 }

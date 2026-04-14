@@ -284,3 +284,117 @@ article header h1 {
 .article-content tr:nth-child(even) td {
   background: #fafafa;
 }
+
+/* ===== Pros / Cons ===== */
+.pros-cons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 600px) {
+  .pros-cons {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pros,
+.cons {
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+}
+
+.pros {
+  background: #f0faf4;
+  border: 1px solid #b8e6c9;
+}
+
+.cons {
+  background: #fff5f5;
+  border: 1px solid #f5c6c6;
+}
+
+.pros h3,
+.cons h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.pros h3 {
+  color: #1a7a3a;
+}
+
+.cons h3 {
+  color: #c0392b;
+}
+
+.pros ul,
+.cons ul {
+  padding-left: 1.25rem;
+  margin: 0;
+}
+
+.pros li,
+.cons li {
+  font-size: 0.925rem;
+  line-height: 1.6;
+  margin-bottom: 0.35rem;
+  color: #333;
+}
+
+/* ===== FAQ ===== */
+.faq {
+  margin: 1.5rem 0;
+}
+
+.faq-item {
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  background: #fafafa;
+}
+
+.faq-item h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 0.5rem;
+}
+
+.faq-item p {
+  font-size: 0.925rem;
+  color: #444;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ===== Video section ===== */
+.video-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.yt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #ff0000;
+  color: #fff !important;
+  padding: 0.6rem 1.1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: background 0.15s ease;
+  align-self: flex-start;
+}
+
+.yt-btn:hover {
+  background: #cc0000;
+  text-decoration: none !important;
+}
