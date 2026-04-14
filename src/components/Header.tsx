@@ -22,7 +22,7 @@ export default function Header({ locale }: { locale: string }) {
     <header>
       <nav aria-label="Main navigation">
         <Link href={`/${locale}`} className="site-logo">
-          TechPulse
+          GearForge
         </Link>
         <ul>
           <li>

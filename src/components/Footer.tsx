@@ -9,7 +9,7 @@
 export default function Footer() {
   return (
     <footer>
-      <p>© {new Date().getFullYear()} TechPulse. All rights reserved.</p>
+      <p>© {new Date().getFullYear()} GearForge. All rights reserved.</p>
     </footer>
   );
 }

@@ -58,7 +58,7 @@ export function generatePageMetadata({
       title,
       description,
       url,
-      siteName: "TechPulse",
+      siteName: "GearForge",
       locale: locale === "uk" ? "uk_UA" : "en_US",
       type: "website",
       ...(image && { images: [{ url: image, width: 1200, height: 630 }] }),

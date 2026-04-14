@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return {};
 
   return generatePageMetadata({
-    title: `${post.title} — TechPulse`,
+    title: `${post.title} — GearForge`,
     description: post.description,
     locale,
     path: `/blog/${slug}`,
