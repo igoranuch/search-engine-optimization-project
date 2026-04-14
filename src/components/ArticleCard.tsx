@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslation } from "react-i18next";
 import type { PostMeta } from "@/lib/posts";
 
 /*
@@ -19,19 +19,19 @@ type Props = {
 };
 
 export default function ArticleCard({ post, locale }: Props) {
-  const t = useTranslations("home");
+  const { t } = useTranslation();
 
   return (
-    <article>
+    <article className="article-card">
       <h2>
         <Link href={`/${locale}/blog/${post.slug}`}>{post.title}</Link>
       </h2>
       <p>{post.description}</p>
-      <small>
-        {post.date} · {post.readingTime}
-      </small>
+      <small>{post.date}</small>
       <br />
-      <Link href={`/${locale}/blog/${post.slug}`}>{t("readMore")} →</Link>
+      <Link href={`/${locale}/blog/${post.slug}`} className="read-more">
+        {t("home.readMore")} →
+      </Link>
     </article>
   );
 }

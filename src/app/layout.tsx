@@ -1,5 +1,5 @@
+import { headers } from "next/headers";
 import "./globals.css";
-import { getLocale } from "next-intl/server";
 
 /*
  * SEO-ПОЯСНЕННЯ: Атрибут lang на <html>
@@ -8,14 +8,14 @@ import { getLocale } from "next-intl/server";
  * Навіщо: Пошукові системи та screen readers використовують цей атрибут
  *   щоб правильно визначити мову контенту.
  * Як впливає: Допомагає Google показувати сторінку правильній аудиторії.
- *   Також покращує доступність (accessibility).
  */
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const locale = await getLocale();
+  // Читаємо локаль з заголовка, встановленого middleware
+  const locale = (await headers()).get("x-locale") || "uk";
 
   return (
     <html lang={locale}>

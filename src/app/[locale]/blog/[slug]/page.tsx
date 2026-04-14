@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { getPostBySlug, getAllPostSlugs } from "@/lib/posts";
 import { generatePageMetadata } from "@/lib/seo";
-import { getTranslations } from "next-intl/server";
+import { getTranslation } from "@/i18n/config";
 import ArticleJsonLd from "@/components/seo/JsonLd";
 import type { Metadata } from "next";
 
@@ -53,7 +52,7 @@ export async function generateStaticParams() {
 export default async function BlogPostPage({ params }: Props) {
   const { locale, slug } = await params;
   const post = getPostBySlug(locale, slug);
-  const t = await getTranslations({ locale, namespace: "blog" });
+  const { t } = await getTranslation(locale);
 
   if (!post) notFound();
 
@@ -71,11 +70,12 @@ export default async function BlogPostPage({ params }: Props) {
       <article>
         <header>
           <h1>{post.title}</h1>
-          <p>
-            {t("author")}: {post.author} · {t("publishedAt")}: {post.date} · {post.readingTime}
+          <p className="article-meta">
+            {t("blog.author")}: <strong>{post.author}</strong> ·{" "}
+            {t("blog.publishedAt")}: {post.date}
           </p>
           {post.tags && (
-            <ul style={{ display: "flex", gap: "0.5rem", listStyle: "none" }}>
+            <ul className="tags">
               {post.tags.map((tag) => (
                 <li key={tag}>#{tag}</li>
               ))}
@@ -83,7 +83,12 @@ export default async function BlogPostPage({ params }: Props) {
           )}
         </header>
 
-        <MDXRemote source={post.content} />
+        {/* dangerouslySetInnerHTML — рендеримо HTML-контент статті.
+            Контент зберігається у наших власних .html файлах, тому це безпечно. */}
+        <div
+          className="article-content"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
       </article>
     </>
   );

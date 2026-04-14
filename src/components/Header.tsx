@@ -1,5 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 /*
@@ -10,21 +12,25 @@ import LanguageSwitcher from "./LanguageSwitcher";
  * Навіщо: Google використовує семантичні теги щоб зрозуміти структуру сторінки.
  *   <nav> допомагає пошуковому роботу знайти основні розділи сайту.
  * Як впливає: Правильна семантика покращує розуміння сайту пошуковими
- *   системами та допомагає формувати sitelinks (швидкі посилання) в результатах пошуку.
+ *   системами та допомагає формувати sitelinks в результатах пошуку.
  */
 
 export default function Header({ locale }: { locale: string }) {
-  const t = useTranslations("nav");
+  const { t } = useTranslation();
 
   return (
     <header>
       <nav aria-label="Main navigation">
-        <Link href={`/${locale}`}>
-          <strong>TechPulse</strong>
+        <Link href={`/${locale}`} className="site-logo">
+          TechPulse
         </Link>
         <ul>
-          <li><Link href={`/${locale}`}>{t("home")}</Link></li>
-          <li><Link href={`/${locale}/blog`}>{t("blog")}</Link></li>
+          <li>
+            <Link href={`/${locale}`}>{t("nav.home")}</Link>
+          </li>
+          <li>
+            <Link href={`/${locale}/blog`}>{t("nav.blog")}</Link>
+          </li>
         </ul>
         <LanguageSwitcher locale={locale} />
       </nav>

@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslation } from "@/i18n/config";
 import { generatePageMetadata } from "@/lib/seo";
 import { getAllPosts } from "@/lib/posts";
 import ArticleCard from "@/components/ArticleCard";
@@ -10,11 +10,11 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "site" });
+  const { t } = await getTranslation(locale);
 
   return generatePageMetadata({
-    title: t("title"),
-    description: t("description"),
+    title: t("site.title"),
+    description: t("site.description"),
     locale,
     path: "",
   });
@@ -22,12 +22,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "home" });
+  const { t } = await getTranslation(locale);
   const posts = getAllPosts(locale);
 
   return (
     <section>
-      <h1>{t("heading")}</h1>
+      <h1>{t("home.heading")}</h1>
       {posts.length === 0 && <p>Coming soon...</p>}
       {posts.map((post) => (
         <ArticleCard key={post.slug} post={post} locale={locale} />

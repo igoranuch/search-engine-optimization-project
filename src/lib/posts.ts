@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import readingTime from "reading-time";
 
 export type PostFrontmatter = {
   title: string;
@@ -14,7 +13,6 @@ export type PostFrontmatter = {
 
 export type PostMeta = PostFrontmatter & {
   slug: string;
-  readingTime: string;
 };
 
 export type Post = PostMeta & {
@@ -31,18 +29,17 @@ export function getAllPosts(locale: string): PostMeta[] {
 
   if (!fs.existsSync(dir)) return [];
 
-  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".mdx"));
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".html"));
 
   return files
     .map((filename) => {
-      const slug = filename.replace(/\.mdx$/, "");
+      const slug = filename.replace(/\.html$/, "");
       const filePath = path.join(dir, filename);
       const fileContent = fs.readFileSync(filePath, "utf-8");
-      const { data, content } = matter(fileContent);
+      const { data } = matter(fileContent);
 
       return {
         slug,
-        readingTime: readingTime(content).text,
         ...(data as PostFrontmatter),
       };
     })
@@ -53,7 +50,7 @@ export function getAllPosts(locale: string): PostMeta[] {
  * Отримати конкретний пост за slug та мовою.
  */
 export function getPostBySlug(locale: string, slug: string): Post | null {
-  const filePath = path.join(CONTENT_DIR, locale, `${slug}.mdx`);
+  const filePath = path.join(CONTENT_DIR, locale, `${slug}.html`);
 
   if (!fs.existsSync(filePath)) return null;
 
@@ -63,7 +60,6 @@ export function getPostBySlug(locale: string, slug: string): Post | null {
   return {
     slug,
     content,
-    readingTime: readingTime(content).text,
     ...(data as PostFrontmatter),
   };
 }
@@ -78,6 +74,6 @@ export function getAllPostSlugs(locale: string): string[] {
 
   return fs
     .readdirSync(dir)
-    .filter((f) => f.endsWith(".mdx"))
-    .map((f) => f.replace(/\.mdx$/, ""));
+    .filter((f) => f.endsWith(".html"))
+    .map((f) => f.replace(/\.html$/, ""));
 }
