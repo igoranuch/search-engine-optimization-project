@@ -28,6 +28,9 @@ export default function Header({ locale }: { locale: string }) {
           <li>
             <Link href={`/${locale}`}>{t("nav.home")}</Link>
           </li>
+          <li>
+            <Link href={`/${locale}/blog`}>{t("nav.blog")}</Link>
+          </li>
         </ul>
         <LanguageSwitcher locale={locale} />
       </nav>

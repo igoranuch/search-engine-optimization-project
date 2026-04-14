@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { getTranslation } from "@/i18n/config";
 import { generatePageMetadata } from "@/lib/seo";
 import { getAllPosts } from "@/lib/posts";
@@ -41,9 +40,6 @@ export default async function HomePage({ params }: Props) {
         {latestPosts.map((post) => (
           <ArticleCard key={post.slug} post={post} locale={locale} />
         ))}
-        <Link href={`/${locale}/blog`} className="view-all-link">
-          {t("home.viewAll")}
-        </Link>
       </section>
     </>
   );
