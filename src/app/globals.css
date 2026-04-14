@@ -26,30 +26,26 @@ a:hover {
   text-decoration: underline;
 }
 
-/* ===== Обгортка сторінки ===== */
-body > :is(header, main, footer) {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 0 1.25rem;
-}
-
-/* ===== Header / Nav ===== */
+/* ===== Header — повна ширина з центрованим вмістом ===== */
 header {
-  border-bottom: 2px solid #ffe900; /* жовто-синя тема для 🇺🇦 */
+  border-bottom: 2px solid #ffe900;
 }
 
 header nav {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
   display: flex;
   align-items: center;
   gap: 2rem;
-  padding: 1rem 0;
 }
 
 .site-logo {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #1a1a1a;
   letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 
 .site-logo:hover {
@@ -83,6 +79,7 @@ header nav > a:last-child {
   border: 1px solid #ddd;
   padding: 0.25rem 0.625rem;
   border-radius: 4px;
+  white-space: nowrap;
 }
 
 header nav > a:last-child:hover {
@@ -93,8 +90,10 @@ header nav > a:last-child:hover {
 
 /* ===== Main ===== */
 main {
-  min-height: 60vh;
+  max-width: 860px;
+  margin: 0 auto;
   padding: 2.5rem 1.25rem;
+  min-height: 60vh;
 }
 
 /* ===== Footer ===== */
@@ -110,7 +109,7 @@ footer {
 h1 {
   font-size: 2rem;
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.3;
   margin-bottom: 1.5rem;
   color: #111;
 }
@@ -123,7 +122,7 @@ h2 {
 
 /* ===== Hero ===== */
 .hero {
-  padding: 3.5rem 0 2.5rem;
+  padding: 3rem 0 2.5rem;
   border-bottom: 1px solid #e8e8e8;
   margin-bottom: 2.5rem;
 }
@@ -132,42 +131,24 @@ h2 {
   font-size: 3rem;
   font-weight: 800;
   letter-spacing: -0.03em;
-  line-height: 1.1;
+  line-height: 1.2;
   margin-bottom: 0.75rem;
-  background: linear-gradient(135deg, #111 60%, #0057b8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #111;
 }
 
 .hero-subtitle {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   color: #555;
   max-width: 520px;
+  line-height: 1.6;
 }
 
 /* ===== Section heading ===== */
 .section-heading {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: 1.25rem;
   color: #111;
-}
-
-/* ===== "Всі статті" посилання ===== */
-.view-all-link {
-  display: inline-block;
-  margin-top: 1.25rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #0057b8;
-  border-bottom: 2px solid #ffe900;
-  padding-bottom: 1px;
-}
-
-.view-all-link:hover {
-  text-decoration: none;
-  color: #003d8a;
 }
 
 /* ===== Картка статті ===== */
@@ -190,7 +171,8 @@ h2 {
 
 .article-card h2 a {
   color: #111;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
+  line-height: 1.4;
 }
 
 .article-card h2 a:hover {
@@ -257,10 +239,9 @@ article header h1 {
 
 .article-content h2 {
   font-size: 1.5rem;
+  font-weight: 700;
   margin: 2.25rem 0 0.75rem;
-  padding-bottom: 0.25rem;
-  border-bottom: 2px solid #ffe900;
-  display: inline-block;
+  color: #111;
 }
 
 .article-content h3 {
@@ -291,11 +272,13 @@ article header h1 {
   text-align: left;
   padding: 0.6rem 1rem;
   border: 1px solid #ddd;
+  color: #111;
 }
 
 .article-content td {
   padding: 0.55rem 1rem;
   border: 1px solid #e8e8e8;
+  color: #1a1a1a;
 }
 
 .article-content tr:nth-child(even) td {
