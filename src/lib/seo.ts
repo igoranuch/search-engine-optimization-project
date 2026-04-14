@@ -32,9 +32,6 @@ export function generatePageMetadata({
   image,
 }: SeoParams): Metadata {
   const url = `${BASE_URL}/${locale}${path}`;
-  const otherLocale = locale === "uk" ? "en" : "uk";
-  const alternateUrl = `${BASE_URL}/${otherLocale}${path}`;
-
   return {
     title,
     description,
