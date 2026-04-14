@@ -2,7 +2,11 @@ import { notFound } from "next/navigation";
 import { getPostBySlug, getAllPostSlugs } from "@/lib/posts";
 import { generatePageMetadata } from "@/lib/seo";
 import { getTranslation } from "@/i18n/config";
-import ArticleJsonLd from "@/components/seo/JsonLd";
+import ArticleJsonLd, {
+  BreadcrumbJsonLd,
+  FAQJsonLd,
+  extractFAQItems,
+} from "@/components/seo/JsonLd";
 import RelatedPosts from "@/components/RelatedPosts";
 import type { Metadata } from "next";
 import { BASE_URL } from "@/lib/config";
@@ -56,6 +60,9 @@ export default async function BlogPostPage({ params }: Props) {
 
   if (!post) notFound();
 
+  const articleUrl = `${BASE_URL}/${locale}/blog/${slug}`;
+  const faqItems = extractFAQItems(post.content);
+
   return (
     <>
       <ArticleJsonLd
@@ -63,9 +70,19 @@ export default async function BlogPostPage({ params }: Props) {
         description={post.description}
         date={post.date}
         author={post.author}
-        url={`${BASE_URL}/${locale}/blog/${slug}`}
+        url={articleUrl}
         image={post.image}
       />
+
+      <BreadcrumbJsonLd
+        items={[
+          { name: locale === "uk" ? "Головна" : "Home", url: `${BASE_URL}/${locale}` },
+          { name: locale === "uk" ? "Блог" : "Blog", url: `${BASE_URL}/${locale}/blog` },
+          { name: post.title, url: articleUrl },
+        ]}
+      />
+
+      <FAQJsonLd items={faqItems} />
 
       <article>
         <header>
