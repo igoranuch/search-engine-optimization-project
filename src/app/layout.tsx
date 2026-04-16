@@ -36,8 +36,19 @@ export default async function RootLayout({
   // Читаємо локаль з заголовка, встановленого middleware
   const locale = (await headers()).get("x-locale") || "en";
 
+  /*
+   * Inline-скрипт нижче виконується ДО першого рендеру body. Він читає
+   * збережену тему з localStorage (або системну prefers-color-scheme) і
+   * ставить data-theme на <html>. Це запобігає "спалаху" світлої теми при
+   * перезавантаженні сторінки, коли користувач обрав темну.
+   */
+  const themeInitScript = `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
+
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>
         {children}
         <Analytics />

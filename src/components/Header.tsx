@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 /*
  * SEO-ПОЯСНЕННЯ: Семантичний HTML — <header> та <nav>
@@ -32,7 +33,10 @@ export default function Header({ locale }: { locale: string }) {
             <Link href={`/${locale}/blog`}>{t("nav.blog")}</Link>
           </li>
         </ul>
-        <LanguageSwitcher locale={locale} />
+        <div className="header-actions">
+          <ThemeSwitcher />
+          <LanguageSwitcher locale={locale} />
+        </div>
       </nav>
     </header>
   );
