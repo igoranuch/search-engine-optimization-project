@@ -34,7 +34,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   // Читаємо локаль з заголовка, встановленого middleware
-  const locale = (await headers()).get("x-locale") || "uk";
+  const locale = (await headers()).get("x-locale") || "en";
 
   return (
     <html lang={locale}>

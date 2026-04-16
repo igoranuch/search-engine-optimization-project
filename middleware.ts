@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const locales = ["uk", "en"];
-const defaultLocale = "uk";
+const defaultLocale = "en";
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
@@ -17,7 +17,7 @@ export function middleware(request: NextRequest) {
   // Передаємо локаль у заголовку для root layout (щоб встановити lang на <html>)
   const response = pathnameLocale
     ? NextResponse.next()
-    : NextResponse.redirect(new URL(`/${defaultLocale}${pathname}`, request.url));
+    : NextResponse.redirect(new URL(`/${defaultLocale}${pathname}`, request.url), 308);
 
   response.headers.set("x-locale", locale);
   return response;
