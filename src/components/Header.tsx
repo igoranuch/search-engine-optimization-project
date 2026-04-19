@@ -18,7 +18,6 @@ import ThemeSwitcher from "./ThemeSwitcher";
 
 export default function Header({ locale }: { locale: string }) {
   const { t } = useTranslation();
-
   return (
     <header>
       <nav aria-label="Main navigation">
@@ -30,7 +29,14 @@ export default function Header({ locale }: { locale: string }) {
             <Link href={`/${locale}`}>{t("nav.home")}</Link>
           </li>
           <li>
-            <Link href={`/${locale}/blog`}>{t("nav.blog")}</Link>
+            <Link href={`/${locale}/blog/components`}>
+              {t("categories.components")}
+            </Link>
+          </li>
+          <li>
+            <Link href={`/${locale}/blog/builds`}>
+              {t("categories.builds")}
+            </Link>
           </li>
         </ul>
         <div className="header-actions">

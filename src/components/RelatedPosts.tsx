@@ -34,7 +34,7 @@ export default function RelatedPosts({ locale, currentSlug, labels }: Props) {
       <ul className="related-posts__list">
         {related.map((post) => (
           <li key={post.slug} className="related-posts__item">
-            <Link href={`/${locale}/blog/${post.slug}`} className="related-posts__link">
+            <Link href={`/${locale}/blog/${post.category}/${post.slug}`} className="related-posts__link">
               <span className="related-posts__title">{post.title}</span>
               <span className="related-posts__desc">{post.description}</span>
               <span className="related-posts__cta">{labels.readMore} →</span>

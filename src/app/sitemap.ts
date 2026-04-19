@@ -1,26 +1,6 @@
 import type { MetadataRoute } from "next";
-import { getAllPostSlugs } from "@/lib/posts";
+import { getAllPosts, CATEGORIES } from "@/lib/posts";
 import { SITE_URL } from "@/lib/config";
-
-/*
- * SEO-ПОЯСНЕННЯ: Sitemap
- *
- * Що: sitemap.xml — файл зі списком усіх URL сайту, доступний за /sitemap.xml.
- * Навіщо: Допомагає Google знайти та проіндексувати всі сторінки сайту,
- *   навіть якщо до них немає внутрішніх посилань. Особливо важливо для
- *   нових сайтів, де Google ще не знає про всі сторінки.
- * Як впливає: Прискорює індексацію нових статей. Без sitemap Google може
- *   виявити сторінки через кілька тижнів, з sitemap — часто за кілька днів.
- *
- * changeFrequency — підказка для Google як часто перевіряти сторінку:
- *   - "daily" для головної і списку блогу (оновлюються часто)
- *   - "monthly" для окремих статей (змінюються рідко)
- *
- * priority — відносна важливість сторінки від 0 до 1:
- *   - 1.0 — головна сторінка (найважливіша)
- *   - 0.9 — сторінка списку блогу
- *   - 0.8 — окремі статті
- */
 
 const LOCALES = ["uk", "en"] as const;
 
@@ -45,12 +25,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     });
 
-    // Окремі статті
-    const slugs = getAllPostSlugs(locale);
-    for (const slug of slugs) {
+    // Категорійні сторінки
+    for (const category of CATEGORIES) {
       entries.push({
-        url: `${SITE_URL}/${locale}/blog/${slug}`,
+        url: `${SITE_URL}/${locale}/blog/${category}`,
         lastModified: now,
+        changeFrequency: "weekly",
+        priority: 0.85,
+      });
+    }
+
+    // Окремі статті
+    const posts = getAllPosts(locale);
+    for (const post of posts) {
+      entries.push({
+        url: `${SITE_URL}/${locale}/blog/${post.category}/${post.slug}`,
+        lastModified: new Date(post.date),
         changeFrequency: "monthly",
         priority: 0.8,
       });

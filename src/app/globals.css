@@ -500,6 +500,51 @@ article header h1 {
   color: var(--text-body);
 }
 
+
+/* ===== Blog category sections ===== */
+.blog-category-section {
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.blog-category-section:last-child {
+  border-bottom: none;
+}
+
+.blog-category-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.blog-category-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 0.25rem;
+}
+
+.blog-category-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.blog-category-link {
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  padding-top: 0.25rem;
+}
+
+.blog-category-link:hover {
+  text-decoration: underline;
+}
+
 /* ===== FAQ ===== */
 .faq {
   margin: 1.5rem 0;

@@ -24,12 +24,12 @@ export default function ArticleCard({ post, locale }: Props) {
   return (
     <article className="article-card">
       <h2>
-        <Link href={`/${locale}/blog/${post.slug}`}>{post.title}</Link>
+        <Link href={`/${locale}/blog/${post.category}/${post.slug}`}>{post.title}</Link>
       </h2>
       <p>{post.description}</p>
       <small>{post.date}</small>
       <br />
-      <Link href={`/${locale}/blog/${post.slug}`} className="read-more">
+      <Link href={`/${locale}/blog/${post.category}/${post.slug}`} className="read-more">
         {t("home.readMore")} →
       </Link>
     </article>

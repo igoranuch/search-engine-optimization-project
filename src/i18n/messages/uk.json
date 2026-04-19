@@ -17,10 +17,18 @@
   "blog": {
     "publishedAt": "Опубліковано",
     "author": "Автор",
-    "description": "Усі статті про комп'ютери, комплектуючі та ігри"
+    "description": "Усі статті про комп'ютери, комплектуючі та ігри",
+    "viewAll": "Всі статті",
+    "noPosts": "Статей поки немає."
   },
   "related": {
     "heading": "Читайте також",
     "readMore": "Читати"
+  },
+  "categories": {
+    "components": "Компоненти",
+    "componentsDesc": "Огляди та порівняння CPU, GPU, RAM, SSD",
+    "builds": "Збірки",
+    "buildsDesc": "Готові конфігурації для різних бюджетів"
   }
 }

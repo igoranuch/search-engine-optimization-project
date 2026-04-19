@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getPostBySlug, getAllPostSlugs } from "@/lib/posts";
+import { getPostBySlug, getAllPostsWithCategory, CATEGORIES } from "@/lib/posts";
 import { generatePageMetadata } from "@/lib/seo";
 import { getTranslation } from "@/i18n/config";
 import ArticleJsonLd, {
@@ -12,11 +12,11 @@ import type { Metadata } from "next";
 import { BASE_URL } from "@/lib/config";
 
 type Props = {
-  params: Promise<{ locale: string; slug: string }>;
+  params: Promise<{ locale: string; category: string; slug: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { locale, category, slug } = await params;
   const post = getPostBySlug(locale, slug);
 
   if (!post) return {};
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${post.title} — GearForge`,
     description: post.description,
     locale,
-    path: `/blog/${slug}`,
+    path: `/blog/${category}/${slug}`,
     image: post.image,
   });
 }
@@ -41,12 +41,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
  */
 export async function generateStaticParams() {
   const locales = ["uk", "en"];
-  const params: { locale: string; slug: string }[] = [];
+  const params: { locale: string; category: string; slug: string }[] = [];
 
   for (const locale of locales) {
-    const slugs = getAllPostSlugs(locale);
-    for (const slug of slugs) {
-      params.push({ locale, slug });
+    const posts = getAllPostsWithCategory(locale);
+    for (const { slug, category } of posts) {
+      params.push({ locale, category, slug });
     }
   }
 
@@ -54,14 +54,24 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPostPage({ params }: Props) {
-  const { locale, slug } = await params;
+  const { locale, category, slug } = await params;
+
+  // Validate category
+  if (!CATEGORIES.includes(category as never)) notFound();
+
   const post = getPostBySlug(locale, slug);
   const { t } = await getTranslation(locale);
 
-  if (!post) notFound();
+  if (!post || post.category !== category) notFound();
 
-  const articleUrl = `${BASE_URL}/${locale}/blog/${slug}`;
+  const articleUrl = `${BASE_URL}/${locale}/blog/${category}/${slug}`;
+  const categoryUrl = `${BASE_URL}/${locale}/blog/${category}`;
   const faqItems = extractFAQItems(post.content);
+
+  const categoryLabel =
+    category === "components"
+      ? locale === "uk" ? "Компоненти" : "Components"
+      : locale === "uk" ? "Збірки" : "Builds";
 
   return (
     <>
@@ -78,6 +88,7 @@ export default async function BlogPostPage({ params }: Props) {
         items={[
           { name: locale === "uk" ? "Головна" : "Home", url: `${BASE_URL}/${locale}` },
           { name: locale === "uk" ? "Блог" : "Blog", url: `${BASE_URL}/${locale}/blog` },
+          { name: categoryLabel, url: categoryUrl },
           { name: post.title, url: articleUrl },
         ]}
       />
@@ -100,8 +111,6 @@ export default async function BlogPostPage({ params }: Props) {
           )}
         </header>
 
-        {/* dangerouslySetInnerHTML — рендеримо HTML-контент статті.
-            Контент зберігається у наших власних .html файлах, тому це безпечно. */}
         <div
           className="article-content"
           dangerouslySetInnerHTML={{ __html: post.content }}

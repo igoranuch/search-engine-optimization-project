@@ -17,10 +17,18 @@
   "blog": {
     "publishedAt": "Published",
     "author": "Author",
-    "description": "All articles about computers, hardware and games"
+    "description": "All articles about computers, hardware and games",
+    "viewAll": "View all",
+    "noPosts": "No posts yet."
   },
   "related": {
     "heading": "Read also",
     "readMore": "Read"
+  },
+  "categories": {
+    "components": "Components",
+    "componentsDesc": "CPU, GPU, RAM, SSD reviews and comparisons",
+    "builds": "Builds",
+    "buildsDesc": "Complete build guides for every budget"
   }
 }

@@ -22,7 +22,10 @@
       "Bash(npm install:*)",
       "WebFetch(domain:vercel.com)",
       "Bash(wc -c \"c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/content/en/\"*.html \"c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/content/uk/\"*.html)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(perl -i -0pe 's|<div class=\"highlight-box\">\\\\s*\\(<p>[\\\\s\\\\S]*?</p>\\)\\\\s*</div>|$1|g' 'c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/content/uk/pc-of-the-month-february-2026.html' 'c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/content/en/pc-of-the-month-february-2026.html')",
+      "Bash(sed -i 's/^tags:/category: \"components\"\\\\ntags:/' 'c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/content/__TRACKED_VAR__/__TRACKED_VAR__.html')",
+      "Bash(sed -i 's/^tags:/category: \"builds\"\\\\ntags:/' 'c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/content/__TRACKED_VAR__/__TRACKED_VAR__.html')"
     ]
   }
 }
