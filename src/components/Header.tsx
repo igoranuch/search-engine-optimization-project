@@ -21,12 +21,12 @@ export default function Header({ locale }: { locale: string }) {
   return (
     <header>
       <nav aria-label="Main navigation">
-        <Link href={`/${locale}`} className="site-logo">
+        <Link href={`/${locale}/blog`} className="site-logo">
           GearForge
         </Link>
         <ul>
           <li>
-            <Link href={`/${locale}`}>{t("nav.home")}</Link>
+            <Link href={`/${locale}/blog`}>{t("nav.home")}</Link>
           </li>
           <li>
             <Link href={`/${locale}/blog/components`}>
