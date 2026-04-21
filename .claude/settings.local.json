@@ -25,7 +25,13 @@
       "Bash(npx tsc:*)",
       "Bash(perl -i -0pe 's|<div class=\"highlight-box\">\\\\s*\\(<p>[\\\\s\\\\S]*?</p>\\)\\\\s*</div>|$1|g' 'c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/content/uk/pc-of-the-month-february-2026.html' 'c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/content/en/pc-of-the-month-february-2026.html')",
       "Bash(sed -i 's/^tags:/category: \"components\"\\\\ntags:/' 'c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/content/__TRACKED_VAR__/__TRACKED_VAR__.html')",
-      "Bash(sed -i 's/^tags:/category: \"builds\"\\\\ntags:/' 'c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/content/__TRACKED_VAR__/__TRACKED_VAR__.html')"
+      "Bash(sed -i 's/^tags:/category: \"builds\"\\\\ntags:/' 'c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/content/__TRACKED_VAR__/__TRACKED_VAR__.html')",
+      "Bash(sed -i 's/export type Category = \"components\" | \"builds\";/export type Category = \"components\" | \"builds\" | \"news\";/' \"c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/src/lib/posts.ts\")",
+      "Bash(sed -i 's/export const CATEGORIES: Category\\\\[\\\\] = \\\\[\"components\", \"builds\"\\\\];/export const CATEGORIES: Category[] = [\"components\", \"builds\", \"news\"];/' \"c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/src/lib/posts.ts\")",
+      "Bash(sed -i 's/export type ComponentSubcategory = \"cpu\" | \"gpu\" | \"ram\" | \"storage\" | \"motherboards\";/export type ComponentSubcategory = \"cpu\" | \"gpu\" | \"ram\" | \"ssd\" | \"hdd\" | \"motherboards\";/' \"c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/src/lib/posts.ts\")",
+      "Bash(sed -i 's/export const COMPONENT_SUBCATEGORIES: ComponentSubcategory\\\\[\\\\] = \\\\[/export const COMPONENT_SUBCATEGORIES: ComponentSubcategory[] = [/' \"c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/src/lib/posts.ts\")",
+      "Bash(sed -i 's/subcategory: \"storage\"/subcategory: \"ssd\"/' \"c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/content/en/best-ssd-2026.html\")",
+      "Bash(sed -i 's/subcategory: \"storage\"/subcategory: \"ssd\"/' \"c:/Users/igorm/OneDrive/Desktop/project 0/search-engine-optimization-project/content/uk/best-ssd-2026.html\")"
     ]
   }
 }

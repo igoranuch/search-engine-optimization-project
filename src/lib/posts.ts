@@ -1,8 +1,20 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+export { getPostPath } from "./urls";
 
-export type Category = "components" | "builds";
+export type Category = "builds" | "components" | "news" | "reviews" | "guides";
+export type ComponentSubcategory = "cpu" | "gpu" | "ram" | "ssd" | "hdd" | "motherboards";
+
+export const CATEGORIES: Category[] = ["builds", "components", "news", "reviews", "guides"];
+export const COMPONENT_SUBCATEGORIES: ComponentSubcategory[] = [
+  "cpu", "gpu", "ram", "ssd", "hdd", "motherboards",
+];
+// ssd/hdd live under /components/storage/[type]/, not /components/[subcategory]/
+export const STORAGE_TYPES: ComponentSubcategory[] = ["ssd", "hdd"];
+export const FLAT_SUBCATEGORIES = COMPONENT_SUBCATEGORIES.filter(
+  (s) => !STORAGE_TYPES.includes(s)
+);
 
 export type PostFrontmatter = {
   title: string;
@@ -11,6 +23,7 @@ export type PostFrontmatter = {
   author: string;
   tags: string[];
   category: Category;
+  subcategory?: ComponentSubcategory;
   image?: string;
 };
 
@@ -21,8 +34,6 @@ export type PostMeta = PostFrontmatter & {
 export type Post = PostMeta & {
   content: string;
 };
-
-export const CATEGORIES: Category[] = ["components", "builds"];
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
 
@@ -42,23 +53,24 @@ function readAllPosts(locale: string): PostMeta[] {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-/**
- * Всі пости для мови, відсортовані за датою.
- */
+
 export function getAllPosts(locale: string): PostMeta[] {
   return readAllPosts(locale);
 }
 
-/**
- * Пости конкретної категорії.
- */
 export function getPostsByCategory(locale: string, category: Category): PostMeta[] {
   return readAllPosts(locale).filter((p) => p.category === category);
 }
 
-/**
- * Конкретний пост за slug та мовою.
- */
+export function getPostsBySubcategory(
+  locale: string,
+  subcategory: ComponentSubcategory
+): PostMeta[] {
+  return readAllPosts(locale).filter(
+    (p) => p.category === "components" && p.subcategory === subcategory
+  );
+}
+
 export function getPostBySlug(locale: string, slug: string): Post | null {
   const filePath = path.join(CONTENT_DIR, locale, `${slug}.html`);
   if (!fs.existsSync(filePath)) return null;
@@ -69,9 +81,6 @@ export function getPostBySlug(locale: string, slug: string): Post | null {
   return { slug, content, ...(data as PostFrontmatter) };
 }
 
-/**
- * Пов'язані пости (за спільними тегами, далі за датою).
- */
 export function getRelatedPosts(
   locale: string,
   currentSlug: string,
@@ -93,9 +102,6 @@ export function getRelatedPosts(
   return scored.slice(0, maxCount).map((s) => s.post);
 }
 
-/**
- * Всі slug для generateStaticParams (плоский список).
- */
 export function getAllPostSlugs(locale: string): string[] {
   const dir = path.join(CONTENT_DIR, locale);
   if (!fs.existsSync(dir)) return [];
@@ -105,11 +111,29 @@ export function getAllPostSlugs(locale: string): string[] {
     .map((f) => f.replace(/\.html$/, ""));
 }
 
-/**
- * Всі пости з категорією для generateStaticParams нового роуту.
- */
-export function getAllPostsWithCategory(
+/** For generateStaticParams — non-component articles: {locale, category, slug} */
+export function getPostsForStaticParams(
   locale: string
-): { slug: string; category: Category }[] {
-  return readAllPosts(locale).map((p) => ({ slug: p.slug, category: p.category }));
+): { slug: string; category: string }[] {
+  return readAllPosts(locale)
+    .filter((p) => p.category !== "components")
+    .map((p) => ({ slug: p.slug, category: p.category }));
+}
+
+/** For generateStaticParams — flat component articles (cpu/gpu/ram/motherboards): {subcategory, slug} */
+export function getComponentPostsForStaticParams(
+  locale: string
+): { slug: string; subcategory: string }[] {
+  return readAllPosts(locale)
+    .filter((p) => p.category === "components" && p.subcategory && !STORAGE_TYPES.includes(p.subcategory as ComponentSubcategory))
+    .map((p) => ({ slug: p.slug, subcategory: p.subcategory! }));
+}
+
+/** For generateStaticParams — storage articles (ssd/hdd): {storageType, slug} */
+export function getStoragePostsForStaticParams(
+  locale: string
+): { slug: string; storageType: string }[] {
+  return readAllPosts(locale)
+    .filter((p) => p.category === "components" && STORAGE_TYPES.includes(p.subcategory as ComponentSubcategory))
+    .map((p) => ({ slug: p.slug, storageType: p.subcategory! }));
 }

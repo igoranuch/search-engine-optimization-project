@@ -147,6 +147,98 @@ header nav ul a:hover {
   text-decoration: none;
 }
 
+/* Dropdown nav item */
+.nav-dropdown {
+  position: relative;
+}
+
+/* Looks identical to other nav links */
+.nav-dropdown__trigger {
+  cursor: pointer;
+  color: var(--text-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  user-select: none;
+}
+
+
+.nav-dropdown__menu {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+  list-style: none;
+  /* Override the header nav ul flex rule so items stack vertically */
+  display: flex !important;
+  flex-direction: column;
+  gap: 0 !important;
+  padding: 0.375rem 0;
+  margin: 0;
+  z-index: 100;
+}
+
+.nav-dropdown__menu > li > a {
+  display: block;
+  padding: 0.45rem 1rem;
+  color: var(--text-body);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.nav-dropdown__menu > li > a:hover {
+  background: var(--bg-subtle);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* Storage nested item */
+.nav-dropdown__nested {
+  position: relative;
+}
+
+.nav-dropdown__nested-trigger {
+  display: block;
+  padding: 0.45rem 1rem;
+  color: var(--text-body);
+  font-size: 0.9rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.nav-dropdown__nested-trigger:hover {
+  background: var(--bg-subtle);
+  color: var(--accent);
+}
+
+.nav-dropdown__submenu {
+  list-style: none;
+  display: flex !important;
+  flex-direction: column;
+  gap: 0 !important;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-dropdown__submenu li a {
+  display: block;
+  padding: 0.45rem 1rem 0.45rem 1.75rem;
+  color: var(--text-body);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.nav-dropdown__submenu li a:hover {
+  background: var(--bg-subtle);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+
 /* Права частина хедера — перемикачі */
 .header-actions {
   margin-left: auto;

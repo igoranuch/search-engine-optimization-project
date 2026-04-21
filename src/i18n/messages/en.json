@@ -25,10 +25,25 @@
     "heading": "Read also",
     "readMore": "Read"
   },
+  "subcategories": {
+    "cpu": "CPUs",
+    "gpu": "GPUs",
+    "ram": "Memory",
+    "storage": "Storage",
+    "ssd": "SSD",
+    "hdd": "HDD",
+    "motherboards": "Motherboard"
+  },
   "categories": {
     "components": "Components",
     "componentsDesc": "CPU, GPU, RAM, SSD reviews and comparisons",
     "builds": "Builds",
-    "buildsDesc": "Complete build guides for every budget"
+    "buildsDesc": "Complete build guides for every budget",
+    "news": "News",
+    "newsDesc": "PC industry news, market trends and hardware launches",
+    "reviews": "Reviews",
+    "reviewsDesc": "In-depth GPU, CPU and hardware reviews with real-world benchmarks",
+    "guides": "Guides",
+    "guidesDesc": "Step-by-step guides on building a PC and choosing components"
   }
 }
