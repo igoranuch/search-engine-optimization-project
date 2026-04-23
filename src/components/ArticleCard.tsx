@@ -28,8 +28,18 @@ export default function ArticleCard({ post, locale }: Props) {
         <Link href={getPostPath(locale, post)}>{post.title}</Link>
       </h2>
       <p>{post.description}</p>
-      <small>{post.date}</small>
-      <br />
+      {/*
+       * SEO-ПОЯСНЕННЯ: Час читання (Reading Time)
+       * Відображення "5 min read" поруч з датою підвищує CTR у пошуку
+       * та покращує dwell time — користувачі, які знають обсяг, рідше
+       * одразу повертаються назад (low bounce rate = позитивний UX-сигнал).
+       */}
+      <div className="article-card-meta">
+        <small>{post.date}</small>
+        <span className="reading-time">
+          {t("article.readingTime", { count: post.readingTime })}
+        </span>
+      </div>
       <Link href={getPostPath(locale, post)} className="read-more">
         {t("home.readMore")} →
       </Link>

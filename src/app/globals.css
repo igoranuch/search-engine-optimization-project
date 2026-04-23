@@ -304,13 +304,169 @@ main {
   min-height: 60vh;
 }
 
+/* ===== Breadcrumbs ===== */
+
+/*
+ * SEO-ПОЯСНЕННЯ: Стилізація хлібних крихт
+ * aria-label та aria-current у HTML забезпечують семантику.
+ * CSS-розділювач через ::before — чисте рішення без зайвих DOM-елементів.
+ */
+.breadcrumbs {
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  gap: 0;
+  align-items: center;
+  font-size: 0.82rem;
+  color: var(--text-faint);
+}
+
+.breadcrumbs li {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbs li + li::before {
+  content: "›";
+  margin: 0 0.4rem;
+  color: var(--border-strong);
+}
+
+.breadcrumbs a {
+  color: var(--text-muted);
+}
+
+.breadcrumbs a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.breadcrumbs span[aria-current="page"] {
+  color: var(--text-faint);
+}
+
+/* ===== Article card meta row ===== */
+.article-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+/*
+ * SEO-ПОЯСНЕННЯ: Reading time badge
+ * Видимий час читання покращує UX і знижує bounce rate —
+ * користувач заздалегідь знає обсяг матеріалу.
+ */
+.reading-time {
+  font-size: 0.8rem;
+  color: var(--text-faint);
+}
+
 /* ===== Footer ===== */
 footer {
   border-top: 1px solid var(--border-subtle);
-  padding: 1.5rem 1.25rem;
-  text-align: center;
+  padding: 0;
+}
+
+.footer-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 1.5rem;
+}
+
+/*
+ * SEO-ПОЯСНЕННЯ: Footer grid з internal linking
+ * 3-колонковий grid забезпечує посилання на всі ключові категорії з
+ * кожної сторінки — це покращує crawlability та розподіл PageRank.
+ */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+@media (max-width: 600px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-about {
+    grid-column: 1 / -1;
+  }
+}
+
+.footer-brand {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-bottom: 0.5rem;
+}
+
+.footer-tagline {
+  font-size: 0.85rem;
+  color: var(--text-faint);
+  line-height: 1.6;
+  max-width: 220px;
+}
+
+.footer-nav-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 0.75rem;
+}
+
+.footer-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-nav a {
   font-size: 0.875rem;
   color: var(--text-faint);
+}
+
+.footer-nav a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--text-faint);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.footer-langs {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-langs a {
+  color: var(--text-faint);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.footer-langs a:hover {
+  color: var(--accent);
+  text-decoration: none;
 }
 
 /* ===== Заголовки ===== */
@@ -761,4 +917,51 @@ article header h1 {
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--accent);
+}
+
+/* ===== 404 Not Found ===== */
+
+/*
+ * SEO-ПОЯСНЕННЯ: Кастомна сторінка 404
+ * Повертає справжній HTTP статус 404 (не "м'яку 404" з кодом 200).
+ * Посилання на головні мовні версії запобігають "dead end" для користувача.
+ */
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5rem 1.25rem;
+  min-height: 60vh;
+}
+
+.not-found__code {
+  font-size: 6rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.not-found h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.not-found > p {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.not-found__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.not-found__links a {
+  color: var(--accent);
+  font-weight: 500;
 }

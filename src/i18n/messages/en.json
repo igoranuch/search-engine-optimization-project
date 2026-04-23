@@ -21,6 +21,9 @@
     "viewAll": "View all",
     "noPosts": "No posts yet."
   },
+  "article": {
+    "readingTime": "{{count}} min read"
+  },
   "related": {
     "heading": "Read also",
     "readMore": "Read"
@@ -45,5 +48,16 @@
     "reviewsDesc": "In-depth GPU, CPU and hardware reviews with real-world benchmarks",
     "guides": "Guides",
     "guidesDesc": "Step-by-step guides on building a PC and choosing components"
+  },
+  "footer": {
+    "tagline": "Hardware reviews, benchmarks and PC news",
+    "categories": "Categories",
+    "components": "Components",
+    "rights": "All rights reserved."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for doesn't exist or was moved.",
+    "home": "Back to home"
   }
 }

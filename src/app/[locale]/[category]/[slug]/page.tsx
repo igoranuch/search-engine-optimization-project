@@ -3,7 +3,8 @@ import { getPostBySlug, getPostsForStaticParams, CATEGORIES } from "@/lib/posts"
 import type { Category } from "@/lib/posts";
 import { generatePageMetadata } from "@/lib/seo";
 import { getTranslation } from "@/i18n/config";
-import ArticleJsonLd, { BreadcrumbJsonLd, FAQJsonLd, extractFAQItems } from "@/components/seo/JsonLd";
+import ArticleJsonLd, { BreadcrumbJsonLd, FAQJsonLd, ReviewJsonLd, extractFAQItems } from "@/components/seo/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import RelatedPosts from "@/components/RelatedPosts";
 import type { Metadata } from "next";
 import { BASE_URL } from "@/lib/config";
@@ -64,14 +65,28 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <>
-      <ArticleJsonLd
-        title={post.title}
-        description={post.description}
-        date={post.date}
-        author={post.author}
-        url={articleUrl}
-        image={post.image}
-      />
+      {/* Review schema for review articles with rating; Article schema for everything else */}
+      {post.category === "reviews" && post.rating && post.reviewedProduct ? (
+        <ReviewJsonLd
+          title={post.title}
+          description={post.description}
+          date={post.date}
+          author={post.author}
+          url={articleUrl}
+          rating={post.rating}
+          reviewedProduct={post.reviewedProduct}
+          image={post.image}
+        />
+      ) : (
+        <ArticleJsonLd
+          title={post.title}
+          description={post.description}
+          date={post.date}
+          author={post.author}
+          url={articleUrl}
+          image={post.image}
+        />
+      )}
       <BreadcrumbJsonLd
         items={[
           { name: locale === "uk" ? "Головна" : "Home", url: `${BASE_URL}/${locale}` },
@@ -81,12 +96,26 @@ export default async function ArticlePage({ params }: Props) {
       />
       <FAQJsonLd items={faqItems} />
 
+      {/*
+       * SEO-ПОЯСНЕННЯ: Видимі хлібні крихти
+       * Доповнюють BreadcrumbJsonLd — Google бачить і HTML, і JSON-LD.
+       * aria-label="Breadcrumb" та aria-current="page" покращують доступність.
+       */}
+      <Breadcrumbs
+        items={[
+          { name: locale === "uk" ? "Головна" : "Home", href: `/${locale}` },
+          { name: categoryName, href: `/${locale}/${category}` },
+          { name: post.title, href: `/${locale}/${category}/${slug}` },
+        ]}
+      />
+
       <article>
         <header>
           <h1>{post.title}</h1>
           <p className="article-meta">
             {t("blog.author")}: <strong>{post.author}</strong> ·{" "}
-            {t("blog.publishedAt")}: {post.date}
+            {t("blog.publishedAt")}: {post.date} ·{" "}
+            {t("article.readingTime", { count: post.readingTime })}
           </p>
           {post.tags && (
             <ul className="tags">

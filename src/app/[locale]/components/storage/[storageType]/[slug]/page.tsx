@@ -4,6 +4,7 @@ import type { ComponentSubcategory } from "@/lib/posts";
 import { generatePageMetadata } from "@/lib/seo";
 import { getTranslation } from "@/i18n/config";
 import ArticleJsonLd, { BreadcrumbJsonLd, FAQJsonLd, extractFAQItems } from "@/components/seo/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import RelatedPosts from "@/components/RelatedPosts";
 import type { Metadata } from "next";
 import { BASE_URL } from "@/lib/config";
@@ -72,12 +73,22 @@ export default async function StorageArticlePage({ params }: Props) {
       />
       <FAQJsonLd items={faqItems} />
 
+      <Breadcrumbs
+        items={[
+          { name: locale === "uk" ? "Головна" : "Home", href: `/${locale}` },
+          { name: locale === "uk" ? "Накопичувачі" : "Storage", href: `/${locale}/components/storage/${storageType}` },
+          { name: typeName, href: `/${locale}/components/storage/${storageType}` },
+          { name: post.title, href: `/${locale}/components/storage/${storageType}/${slug}` },
+        ]}
+      />
+
       <article>
         <header>
           <h1>{post.title}</h1>
           <p className="article-meta">
             {t("blog.author")}: <strong>{post.author}</strong> ·{" "}
-            {t("blog.publishedAt")}: {post.date}
+            {t("blog.publishedAt")}: {post.date} ·{" "}
+            {t("article.readingTime", { count: post.readingTime })}
           </p>
           {post.tags && (
             <ul className="tags">

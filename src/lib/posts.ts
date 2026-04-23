@@ -25,10 +25,22 @@ export type PostFrontmatter = {
   category: Category;
   subcategory?: ComponentSubcategory;
   image?: string;
+  /*
+   * SEO-ПОЯСНЕННЯ: Review schema fields
+   *
+   * Що: rating (0-10) та reviewedProduct дозволяють Google відображати
+   *   зірки/рейтинг у сніпеті результатів пошуку через Review schema.
+   * Навіщо: Сніпети з зірочками мають CTR на 15-30% вищий ніж звичайні.
+   * Як впливає: Додаємо до фронтматеру статей-оглядів — Google підбирає
+   *   їх автоматично і може показати ratingValue прямо в пошуку.
+   */
+  rating?: number;
+  reviewedProduct?: string;
 };
 
 export type PostMeta = PostFrontmatter & {
   slug: string;
+  readingTime: number;
 };
 
 export type Post = PostMeta & {
@@ -36,6 +48,22 @@ export type Post = PostMeta & {
 };
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
+
+/*
+ * SEO-ПОЯСНЕННЯ: Час читання (Reading Time)
+ *
+ * Що: Розрахунок приблизного часу читання статті на основі кількості слів.
+ * Навіщо: Час читання — сигнал якості контенту. Статті з позначкою "8 хв читання"
+ *   мають вищий CTR ніж без неї, бо користувач одразу розуміє обсяг матеріалу.
+ *   Менший bounce rate та більший dwell time = позитивні поведінкові сигнали для Google.
+ * Як впливає: Покращує UX та побічно впливає на SEO через поведінкові метрики.
+ * Середня швидкість читання: ~200 слів/хв для технічного контенту.
+ */
+function calculateReadingTime(htmlContent: string): number {
+  const text = htmlContent.replace(/<[^>]+>/g, " ").trim();
+  const words = text.split(/\s+/).filter((w) => w.length > 0).length;
+  return Math.max(1, Math.round(words / 200));
+}
 
 function readAllPosts(locale: string): PostMeta[] {
   const dir = path.join(CONTENT_DIR, locale);
@@ -47,8 +75,9 @@ function readAllPosts(locale: string): PostMeta[] {
     .map((filename) => {
       const slug = filename.replace(/\.html$/, "");
       const fileContent = fs.readFileSync(path.join(dir, filename), "utf-8");
-      const { data } = matter(fileContent);
-      return { slug, ...(data as PostFrontmatter) };
+      const { data, content } = matter(fileContent);
+      const readingTime = calculateReadingTime(content);
+      return { slug, readingTime, ...(data as PostFrontmatter) };
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
@@ -77,8 +106,9 @@ export function getPostBySlug(locale: string, slug: string): Post | null {
 
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(fileContent);
+  const readingTime = calculateReadingTime(content);
 
-  return { slug, content, ...(data as PostFrontmatter) };
+  return { slug, content, readingTime, ...(data as PostFrontmatter) };
 }
 
 export function getRelatedPosts(

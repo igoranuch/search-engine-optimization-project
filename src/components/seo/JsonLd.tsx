@@ -165,6 +165,145 @@ export function FAQJsonLd({ items }: FAQJsonLdProps) {
   );
 }
 
+// ─── Organization ────────────────────────────────────────────────────────────
+
+/*
+ * SEO-ПОЯСНЕННЯ: Organization schema (Схема організації)
+ *
+ * Що: Organization — схема що описує компанію/бренд як сутність у Knowledge Graph Google.
+ * Навіщо: Google Knowledge Graph — це база знань Google про реальні об'єкти.
+ *   Коли Google розпізнає GearForge як організацію (а не просто набір текстових сторінок),
+ *   він може відображати Knowledge Panel справа від результатів пошуку.
+ * Як впливає: Entity SEO — нова парадигма. Не тільки ключові слова мають значення,
+ *   але й те, чи Google "знає" хто ти. Organization schema — це перший крок до
+ *   того, щоб Google вважав сайт авторитетним джерелом у своїй ніші.
+ */
+export function OrganizationJsonLd() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "GearForge",
+    url: "https://gearforge.blog",
+    description:
+      "PC hardware reviews, performance benchmarks and gaming news in Ukrainian and English",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://gearforge.blog/logo.png",
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
+
+// ─── WebSite ─────────────────────────────────────────────────────────────────
+
+/*
+ * SEO-ПОЯСНЕННЯ: WebSite schema (Схема веб-сайту)
+ *
+ * Що: WebSite — схема що описує весь сайт цілком.
+ * Навіщо: Разом з Organization, WebSite schema допомагає Google сформувати
+ *   повноцінну сутність у Knowledge Graph. Також вона є основою для
+ *   Sitelinks Searchbox — поля пошуку прямо у результатах Google для брендових запитів.
+ * Як впливає: Сайти з WebSite schema частіше отримують брендові sitelinks і
+ *   краще відображаються при пошуку за назвою бренду. Google краще розуміє
+ *   мовний охоплення сайту через поле inLanguage.
+ */
+export function WebSiteJsonLd() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "GearForge",
+    url: "https://gearforge.blog",
+    inLanguage: ["uk-UA", "en-US"],
+    description: "PC hardware reviews, benchmarks and gaming news",
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
+
+// ─── Review ──────────────────────────────────────────────────────────────────
+
+/*
+ * SEO-ПОЯСНЕННЯ: Review schema (Схема огляду/рецензії)
+ *
+ * Що: Review — схема для оглядів продуктів з рейтингом.
+ * Навіщо: Якщо стаття є оглядом продукту (GPU, CPU тощо) і має числовий рейтинг,
+ *   Google може відображати зірочки (rating stars) прямо у сніпеті результатів
+ *   пошуку. Це один з найефективніших rich snippets для CTR.
+ * Як впливає: Статті з зірочками мають CTR на 15–35% вищий ніж без них.
+ *   Для вмикання потрібно додати до фронтматеру статті поля:
+ *     rating: 8.5          # рейтинг від 1 до 10
+ *     reviewedProduct: "NVIDIA RTX 4070"   # назва продукту
+ */
+
+type ReviewJsonLdProps = {
+  title: string;
+  description: string;
+  date: string;
+  author: string;
+  url: string;
+  rating: number;
+  reviewedProduct: string;
+  image?: string;
+};
+
+export function ReviewJsonLd({
+  title,
+  description,
+  date,
+  author,
+  url,
+  rating,
+  reviewedProduct,
+  image,
+}: ReviewJsonLdProps) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    name: title,
+    reviewBody: description,
+    datePublished: date,
+    url,
+    author: {
+      "@type": "Person",
+      name: author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "GearForge",
+      url: "https://gearforge.blog",
+    },
+    itemReviewed: {
+      "@type": "Product",
+      name: reviewedProduct,
+    },
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: rating,
+      bestRating: 10,
+      worstRating: 1,
+    },
+    ...(image && { image: { "@type": "ImageObject", url: image } }),
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
+
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 /**

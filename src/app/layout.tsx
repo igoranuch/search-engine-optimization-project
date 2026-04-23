@@ -1,7 +1,8 @@
 import { headers } from "next/headers";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
 import "./globals.css";
 
 /*
@@ -18,6 +19,29 @@ export const metadata: Metadata = {
   verification: {
     google: "qkPKH-3cSzUDiFRLo8z9U-d6oKYz30p_CEEGzcAH9Io",
   },
+};
+
+/*
+ * SEO-ПОЯСНЕННЯ: Viewport та themeColor
+ *
+ * Що: viewport визначає як браузер масштабує сторінку на мобільних пристроях.
+ *   themeColor задає колір UI браузера (рядок адреси) на Android і PWA.
+ * Навіщо: Google використовує Mobile-First Indexing — він спочатку сканує
+ *   мобільну версію сайту. Без viewport мета-тега контент може виглядати
+ *   як "десктопний" на телефоні, що погіршує Mobile Usability Score.
+ * Як впливає: Поганий мобільний UX = вищий bounce rate = нижчі позиції.
+ *   Правильний viewport = Google бачить ту ж версію, що й мобільний користувач.
+ *
+ * У Next.js 15 viewport виноситься в окремий export (не metadata),
+ * щоб уникнути конфліктів між layout та сторінками.
+ */
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f1419" },
+  ],
 };
 
 /*
@@ -48,6 +72,9 @@ export default async function RootLayout({
     <html lang={locale} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        {/* Site-wide structured data — присутні на кожній сторінці */}
+        <OrganizationJsonLd />
+        <WebSiteJsonLd />
       </head>
       <body>
         {children}
