@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script";
 import type { Metadata, Viewport } from "next";
 import { OrganizationJsonLd, WebSiteJsonLd } from "@/components/seo/JsonLd";
 import "./globals.css";
@@ -80,6 +81,37 @@ export default async function RootLayout({
         {children}
         <Analytics />
         <SpeedInsights />
+
+        {/*
+         * SEO-ПОЯСНЕННЯ: Google Analytics 4 (GA4)
+         *
+         * Що: GA4 — система веб-аналітики Google що відстежує поведінку користувачів:
+         *   які сторінки переглядають, скільки часу проводять, звідки прийшли.
+         * Навіщо: GA4 ≠ SEO-інструмент напряму, але надає дані що впливають на SEO-рішення:
+         *   - Bounce rate та Engagement rate — показують чи задовольняє контент запит
+         *   - Organic traffic — скільки користувачів прийшло з пошуку
+         *   - Landing pages — які сторінки найефективніші в пошуку
+         *   - User behavior — що роблять після переходу з Google
+         * Як впливає: GA4 ≠ GSC. Google Search Console показує як Google бачить сайт
+         *   (impressions, CTR, позиції). GA4 показує що роблять реальні користувачі
+         *   після кліку. Разом вони дають повну картину воронки пошукового трафіку.
+         *
+         * strategy="afterInteractive" — скрипт завантажується після того як сторінка
+         * стала інтерактивною. Це не блокує рендеринг і не погіршує Core Web Vitals
+         * (LCP, FID/INP) — на відміну від звичайного <script> в <head>.
+         */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-J30JT9KJFM"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-J30JT9KJFM');
+          `}
+        </Script>
       </body>
     </html>
   );
