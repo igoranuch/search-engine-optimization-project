@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_URL } from "./config";
 
 /*
  * SEO-ПОЯСНЕННЯ: Metadata API в Next.js
@@ -14,7 +15,16 @@ import type { Metadata } from "next";
  * посилання в соціальних мережах (Facebook, Twitter, Telegram тощо).
  */
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+/*
+ * SEO-ПОЯСНЕННЯ: Canonical URL base
+ *
+ * Використовуємо SITE_URL як fallback — не localhost.
+ * Якщо б fallback залишався "http://localhost:3000", Google бачив би
+ * canonical: http://localhost:3000/uk — недоступний URL. Google ігнорує
+ * такий canonical і сам вирішує що є головною версією сторінки,
+ * що призводить до "Duplicate without user-selected canonical" у GSC.
+ */
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || SITE_URL;
 
 type SeoParams = {
   title: string;

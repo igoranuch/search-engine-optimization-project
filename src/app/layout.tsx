@@ -61,23 +61,30 @@ export default async function RootLayout({
   // Читаємо локаль з заголовка, встановленого middleware
   const locale = (await headers()).get("x-locale") || "en";
 
-  /*
-   * Inline-скрипт нижче виконується ДО першого рендеру body. Він читає
-   * збережену тему з localStorage (або системну prefers-color-scheme) і
-   * ставить data-theme на <html>. Це запобігає "спалаху" світлої теми при
-   * перезавантаженні сторінки, коли користувач обрав темну.
-   */
-  const themeInitScript = `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
-
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         {/* Site-wide structured data — присутні на кожній сторінці */}
         <OrganizationJsonLd />
         <WebSiteJsonLd />
       </head>
       <body>
+        {/*
+         * Скрипт ініціалізації теми — читає localStorage і ставить data-theme
+         * на <html> до того як браузер рендерить будь-який контент.
+         * Це запобігає "спалаху" (FOUC) при перезавантаженні коли активна темна тема.
+         *
+         * strategy="beforeInteractive" — Next.js/React 19 спосіб замість raw <script>
+         * в <head>. Скрипт вставляється в HTML до будь-якого JS-бандлу Next.js,
+         * тому гарантовано виконується до першого рендеру тіла сторінки.
+         *
+         * Чому не залишити raw <script>: React 19 змінив поведінку <script> тегів
+         * всередині компонентів — вони більше не виконуються при client-side рендері.
+         * next/script з beforeInteractive — рекомендована заміна.
+         */}
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`}
+        </Script>
         {children}
         <Analytics />
         <SpeedInsights />
