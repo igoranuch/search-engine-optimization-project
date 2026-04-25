@@ -9,7 +9,7 @@ import RelatedPosts from "@/components/RelatedPosts";
 import type { Metadata } from "next";
 import { BASE_URL } from "@/lib/config";
 
-type FlatCategory = "builds" | "news" | "reviews";
+type FlatCategory = "builds" | "news";
 const FLAT_CATEGORIES = CATEGORIES.filter((c) => c !== "components") as FlatCategory[];
 
 type Props = {
@@ -57,8 +57,8 @@ export default async function ArticlePage({ params }: Props) {
   const categoryUrl = `${BASE_URL}/${locale}/${category}`;
   const faqItems = extractFAQItems(post.content);
 
-  const ukNames: Record<FlatCategory, string> = { builds: "Збірки", news: "Новини", reviews: "Огляди" };
-  const enNames: Record<FlatCategory, string> = { builds: "Builds", news: "News", reviews: "Reviews" };
+  const ukNames: Record<FlatCategory, string> = { builds: "Збірки", news: "Новини" };
+  const enNames: Record<FlatCategory, string> = { builds: "Builds", news: "News" };
   const categoryName = locale === "uk"
     ? ukNames[category as FlatCategory] ?? category
     : enNames[category as FlatCategory] ?? category;

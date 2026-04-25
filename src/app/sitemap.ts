@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     });
 
-    // Flat category listing pages (builds, news, reviews)
+    // Flat category listing pages (builds, news)
     for (const category of FLAT_CATEGORIES) {
       entries.push({
         url: `${SITE_URL}/${locale}/${category}`,

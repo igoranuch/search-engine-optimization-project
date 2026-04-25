@@ -6,7 +6,7 @@ import { getTranslation } from "@/i18n/config";
 import ArticleCard from "@/components/ArticleCard";
 import type { Metadata } from "next";
 
-type FlatCategory = "builds" | "news" | "reviews";
+type FlatCategory = "builds" | "news";
 const FLAT_CATEGORIES = CATEGORIES.filter((c) => c !== "components") as FlatCategory[];
 
 type Props = {
@@ -24,10 +24,6 @@ const CATEGORY_META: Record<
   news: {
     uk: { title: "Новини — ринок ПК та залізо", description: "Новини ринку ПК, тенденції галузі, анонси заліза та все що важливо знати ентузіасту" },
     en: { title: "News — PC Market & Hardware", description: "PC industry news, market trends, hardware launches and everything enthusiasts need to know" },
-  },
-  reviews: {
-    uk: { title: "Огляди — детальні тести заліза", description: "Детальні огляди відеокарт, процесорів та іншого заліза з реальними бенчмарками" },
-    en: { title: "Reviews — In-Depth Hardware Tests", description: "In-depth GPU, CPU and hardware reviews with real-world benchmarks and gaming tests" },
   },
 };
 

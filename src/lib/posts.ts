@@ -3,10 +3,10 @@ import path from "path";
 import matter from "gray-matter";
 export { getPostPath } from "./urls";
 
-export type Category = "builds" | "components" | "news" | "reviews";
+export type Category = "builds" | "components" | "news";
 export type ComponentSubcategory = "cpu" | "gpu" | "ram" | "ssd" | "hdd" | "motherboards";
 
-export const CATEGORIES: Category[] = ["builds", "components", "news", "reviews"];
+export const CATEGORIES: Category[] = ["builds", "components", "news"];
 export const COMPONENT_SUBCATEGORIES: ComponentSubcategory[] = [
   "cpu", "gpu", "ram", "ssd", "hdd", "motherboards",
 ];
