@@ -6,7 +6,7 @@ import { getTranslation } from "@/i18n/config";
 import ArticleCard from "@/components/ArticleCard";
 import type { Metadata } from "next";
 
-type FlatCategory = "builds" | "news" | "reviews" | "guides";
+type FlatCategory = "builds" | "news" | "reviews";
 const FLAT_CATEGORIES = CATEGORIES.filter((c) => c !== "components") as FlatCategory[];
 
 type Props = {
@@ -28,10 +28,6 @@ const CATEGORY_META: Record<
   reviews: {
     uk: { title: "Огляди — детальні тести заліза", description: "Детальні огляди відеокарт, процесорів та іншого заліза з реальними бенчмарками" },
     en: { title: "Reviews — In-Depth Hardware Tests", description: "In-depth GPU, CPU and hardware reviews with real-world benchmarks and gaming tests" },
-  },
-  guides: {
-    uk: { title: "Гайди — як вибрати та зібрати ПК", description: "Покрокові гайди по вибору комплектуючих, збірці ПК та налаштуванню системи" },
-    en: { title: "Guides — How to Build & Choose", description: "Step-by-step guides on choosing components, building a PC and system setup" },
   },
 };
 

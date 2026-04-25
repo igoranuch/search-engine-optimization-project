@@ -32,7 +32,7 @@ export default function Breadcrumbs({ items }: Props) {
         {items.map((item, i) => {
           const isLast = i === items.length - 1;
           return (
-            <li key={item.href}>
+            <li key={i}>
               {isLast ? (
                 <span aria-current="page">{item.name}</span>
               ) : (
