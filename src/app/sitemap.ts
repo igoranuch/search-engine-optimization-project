@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getAllPosts, CATEGORIES, COMPONENT_SUBCATEGORIES } from "@/lib/posts";
+import { getAllPosts, CATEGORIES, FLAT_SUBCATEGORIES, STORAGE_TYPES } from "@/lib/posts";
 import type { Category } from "@/lib/posts";
 import { SITE_URL } from "@/lib/config";
 import { getPostPath } from "@/lib/posts";
@@ -30,10 +30,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       });
     }
 
-    // Components subcategory pages
-    for (const sub of COMPONENT_SUBCATEGORIES) {
+    // Component subcategory index pages (cpu, gpu, ram, motherboards)
+    // FLAT_SUBCATEGORIES excludes ssd/hdd — those live under /components/storage/[type]/
+    for (const sub of FLAT_SUBCATEGORIES) {
       entries.push({
         url: `${SITE_URL}/${locale}/components/${sub}`,
+        lastModified: now,
+        changeFrequency: "weekly",
+        priority: 0.85,
+      });
+    }
+
+    // Storage type index pages (/components/storage/ssd, /components/storage/hdd)
+    for (const type of STORAGE_TYPES) {
+      entries.push({
+        url: `${SITE_URL}/${locale}/components/storage/${type}`,
         lastModified: now,
         changeFrequency: "weekly",
         priority: 0.85,

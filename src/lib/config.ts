@@ -5,8 +5,6 @@
  * Для локальної розробки можна перевизначити через змінну середовища:
  *   NEXT_PUBLIC_BASE_URL=http://localhost:3000
  */
-export const BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+export const SITE_URL = "https://gearforge.blog";
 
-export const SITE_URL =
-  "https://gearforge.blog";
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || SITE_URL;
