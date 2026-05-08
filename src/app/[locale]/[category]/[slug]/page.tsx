@@ -3,7 +3,7 @@ import { getPostBySlug, getPostsForStaticParams, CATEGORIES } from "@/lib/posts"
 import type { Category } from "@/lib/posts";
 import { generatePageMetadata } from "@/lib/seo";
 import { getTranslation } from "@/i18n/config";
-import ArticleJsonLd, { BreadcrumbJsonLd, FAQJsonLd, ReviewJsonLd, extractFAQItems } from "@/components/seo/JsonLd";
+import ArticleJsonLd, { BreadcrumbJsonLd, FAQJsonLd, extractFAQItems } from "@/components/seo/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import RelatedPosts from "@/components/RelatedPosts";
 import type { Metadata } from "next";
@@ -65,28 +65,14 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <>
-      {/* Review schema for review articles with rating; Article schema for everything else */}
-      {post.category === "reviews" && post.rating && post.reviewedProduct ? (
-        <ReviewJsonLd
-          title={post.title}
-          description={post.description}
-          date={post.date}
-          author={post.author}
-          url={articleUrl}
-          rating={post.rating}
-          reviewedProduct={post.reviewedProduct}
-          image={post.image}
-        />
-      ) : (
-        <ArticleJsonLd
-          title={post.title}
-          description={post.description}
-          date={post.date}
-          author={post.author}
-          url={articleUrl}
-          image={post.image}
-        />
-      )}
+      <ArticleJsonLd
+        title={post.title}
+        description={post.description}
+        date={post.date}
+        author={post.author}
+        url={articleUrl}
+        image={post.image}
+      />
       <BreadcrumbJsonLd
         items={[
           { name: locale === "uk" ? "Головна" : "Home", url: `${BASE_URL}/${locale}` },
