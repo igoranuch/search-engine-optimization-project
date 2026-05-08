@@ -247,6 +247,98 @@ header nav ul a:hover {
   gap: 0.75rem;
 }
 
+/* Hamburger button — hidden on desktop, shown on mobile */
+.nav-hamburger {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.nav-hamburger:hover {
+  background: var(--bg-surface);
+  border-color: var(--border-strong);
+}
+
+.nav-hamburger svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 640px) {
+  header nav {
+    flex-wrap: wrap;
+    row-gap: 0;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .nav-hamburger {
+    display: flex;
+  }
+
+  /* Nav links hidden by default on mobile, shown when .nav-open */
+  header nav > ul {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    padding: 0.5rem 0 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  header nav > ul.nav-open {
+    display: flex;
+  }
+
+  header nav > ul > li > a,
+  .nav-dropdown__trigger {
+    display: block;
+    padding: 0.6rem 0;
+    font-size: 1rem;
+  }
+
+  /* Dropdown becomes inline indented list on mobile */
+  .nav-dropdown__menu {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    border-left: 2px solid var(--border);
+    border-radius: 0;
+    background: transparent;
+    width: 100%;
+    padding: 0.25rem 0 0.25rem 1rem;
+    margin: 0.25rem 0 0;
+  }
+
+  .nav-dropdown__nested-trigger {
+    padding: 0.45rem 0;
+    font-size: 0.95rem;
+  }
+
+  .nav-dropdown__submenu {
+    padding-left: 1rem;
+  }
+
+  .nav-dropdown__submenu li a {
+    padding: 0.4rem 0;
+  }
+}
+
 /* Перемикач мов */
 .lang-switcher {
   font-size: 1.5rem;

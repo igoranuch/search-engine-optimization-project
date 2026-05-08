@@ -6,17 +6,6 @@ import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ThemeSwitcher from "./ThemeSwitcher";
 
-/*
- * SEO-ПОЯСНЕННЯ: Семантичний HTML — <header> та <nav>
- *
- * Що: <header> — семантичний тег для шапки сайту.
- *   <nav> — семантичний тег для навігації.
- * Навіщо: Google використовує семантичні теги щоб зрозуміти структуру сторінки.
- *   <nav> допомагає пошуковому роботу знайти основні розділи сайту.
- * Як впливає: Правильна семантика покращує розуміння сайту пошуковими
- *   системами та допомагає формувати sitelinks в результатах пошуку.
- */
-
 const FLAT_ITEMS = ["cpu", "gpu", "ram", "motherboards"] as const;
 const STORAGE_ITEMS = ["ssd", "hdd"] as const;
 
@@ -24,9 +13,9 @@ export default function Header({ locale }: { locale: string }) {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [storageOpen, setStorageOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const dropdownRef = useRef<HTMLLIElement>(null);
 
-  // Close on outside click
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -37,15 +26,22 @@ export default function Header({ locale }: { locale: string }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  function closeAll() {
+    setMenuOpen(false);
+    setOpen(false);
+    setStorageOpen(false);
+  }
+
   return (
     <header>
       <nav aria-label="Main navigation">
         <Link href={`/${locale}`} className="site-logo">
           GearForge
         </Link>
-        <ul>
+
+        <ul className={menuOpen ? "nav-open" : undefined}>
           <li>
-            <Link href={`/${locale}`}>{t("nav.home")}</Link>
+            <Link href={`/${locale}`} onClick={closeAll}>{t("nav.home")}</Link>
           </li>
 
           {/* Components — click-toggled dropdown */}
@@ -60,7 +56,7 @@ export default function Header({ locale }: { locale: string }) {
               <ul className="nav-dropdown__menu">
                 {FLAT_ITEMS.slice(0, 3).map((key) => (
                   <li key={key}>
-                    <Link href={`/${locale}/components/${key}`} onClick={() => setOpen(false)}>
+                    <Link href={`/${locale}/components/${key}`} onClick={closeAll}>
                       {t(`subcategories.${key}`)}
                     </Link>
                   </li>
@@ -80,7 +76,7 @@ export default function Header({ locale }: { locale: string }) {
                         <li key={type}>
                           <Link
                             href={`/${locale}/components/storage/${type}`}
-                            onClick={() => { setOpen(false); setStorageOpen(false); }}
+                            onClick={closeAll}
                           >
                             {t(`subcategories.${type}`)}
                           </Link>
@@ -92,7 +88,7 @@ export default function Header({ locale }: { locale: string }) {
 
                 {FLAT_ITEMS.slice(3).map((key) => (
                   <li key={key}>
-                    <Link href={`/${locale}/components/${key}`} onClick={() => setOpen(false)}>
+                    <Link href={`/${locale}/components/${key}`} onClick={closeAll}>
                       {t(`subcategories.${key}`)}
                     </Link>
                   </li>
@@ -102,18 +98,35 @@ export default function Header({ locale }: { locale: string }) {
           </li>
 
           <li>
-            <Link href={`/${locale}/builds`}>{t("categories.builds")}</Link>
+            <Link href={`/${locale}/builds`} onClick={closeAll}>{t("categories.builds")}</Link>
           </li>
           <li>
-            <Link href={`/${locale}/news`}>{t("categories.news")}</Link>
-          </li>
-          <li>
-            <Link href={`/${locale}/reviews`}>{t("categories.reviews")}</Link>
+            <Link href={`/${locale}/news`} onClick={closeAll}>{t("categories.news")}</Link>
           </li>
         </ul>
+
         <div className="header-actions">
           <ThemeSwitcher />
           <LanguageSwitcher locale={locale} />
+          <button
+            className="nav-hamburger"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            {menuOpen ? (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <line x1="3" y1="7" x2="21" y2="7" />
+                <line x1="3" y1="12" x2="21" y2="12" />
+                <line x1="3" y1="17" x2="21" y2="17" />
+              </svg>
+            )}
+          </button>
         </div>
       </nav>
     </header>
